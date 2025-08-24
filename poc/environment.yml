@@ -1,0 +1,35 @@
+﻿name: litx
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.12
+  - jupyterlab
+  - ipykernel
+  - numpy
+  - pandas
+  - scikit-learn
+  - scipy
+  - requests
+  - tqdm
+  - pydantic>=2
+  - python-dotenv
+  - networkx
+  - sqlite
+  # --- IR / LLM tooling from conda-forge ---
+  - rank-bm25=0.2.2          # BM25 (noarch on conda-forge)
+  - hnswlib=0.8.0            # ANN index
+  - sentence-transformers     # embeddings framework
+  - transformers              # HF models
+  - accelerate
+  - orjson
+  - rapidfuzz
+  - fastapi
+  - uvicorn                   # ASGI server (if you expose services)
+  - llama-cpp-python         # optional alt backend; LM Studio remains default
+  # --- PyTorch GPU stack via conda ---
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=12.4
