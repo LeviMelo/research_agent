@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  research-agent:
+    build: .
+    # The following 'deploy' section is the modern way to enable GPU access
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

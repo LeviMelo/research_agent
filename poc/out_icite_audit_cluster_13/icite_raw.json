@@ -1,0 +1,4508 @@
+{
+  "27091633": {
+    "_id": "27091633",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Fischerova",
+        "fullName": "Fischerova, D",
+        "firstName": "D"
+      },
+      {
+        "lastName": "Zikan",
+        "fullName": "Zikan, M",
+        "firstName": "M"
+      },
+      {
+        "lastName": "Semeradova",
+        "fullName": "Semeradova, I",
+        "firstName": "I"
+      },
+      {
+        "lastName": "Slama",
+        "fullName": "Slama, J",
+        "firstName": "J"
+      },
+      {
+        "lastName": "Kocian",
+        "fullName": "Kocian, R",
+        "firstName": "R"
+      },
+      {
+        "lastName": "Dundr",
+        "fullName": "Dundr, P",
+        "firstName": "P"
+      },
+      {
+        "lastName": "Nemejcova",
+        "fullName": "Nemejcova, K",
+        "firstName": "K"
+      },
+      {
+        "lastName": "Burgetova",
+        "fullName": "Burgetova, A",
+        "firstName": "A"
+      },
+      {
+        "lastName": "Dusek",
+        "fullName": "Dusek, L",
+        "firstName": "L"
+      },
+      {
+        "lastName": "Cibula",
+        "fullName": "Cibula, D",
+        "firstName": "D"
+      }
+    ],
+    "doi": "10.1002/uog.15942",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Ultrasound Obstet Gynecol",
+    "molCell": 0.0,
+    "pmid": 27091633,
+    "pubYear": 2017,
+    "title": "Ultrasound in preoperative assessment of pelvic and abdominal spread in patients with ovarian cancer: a prospective study.",
+    "acr": 3.5,
+    "apt": 0.75,
+    "citedByClinicalArticle": true,
+    "citedByPmidCount": 28,
+    "citedByPmids": [
+      33847427,
+      36910885,
+      34106762,
+      38531539,
+      38452144,
+      38523785,
+      39393218,
+      32173631,
+      34573942,
+      30630889,
+      38042117,
+      38132461,
+      39971450,
+      30686729,
+      38275863,
+      33871110,
+      31081311,
+      38330272,
+      30718308,
+      31579200,
+      32033429,
+      35752305,
+      38438175,
+      31185938,
+      36600533,
+      36980790,
+      40247746,
+      33222157
+    ],
+    "citedByPmidsByYear": [
+      {
+        "33847427": 2021
+      },
+      {
+        "36910885": 2023
+      },
+      {
+        "34106762": 2021
+      },
+      {
+        "38531539": 2024
+      },
+      {
+        "38452144": 2024
+      },
+      {
+        "38523785": 2024
+      },
+      {
+        "39393218": 2024
+      },
+      {
+        "32173631": 2020
+      },
+      {
+        "34573942": 2021
+      },
+      {
+        "30630889": 2019
+      },
+      {
+        "38042117": 2024
+      },
+      {
+        "38132461": 2023
+      },
+      {
+        "39971450": 2025
+      },
+      {
+        "30686729": 2019
+      },
+      {
+        "38275863": 2024
+      },
+      {
+        "33871110": 2022
+      },
+      {
+        "31081311": 2019
+      },
+      {
+        "38330272": 2024
+      },
+      {
+        "30718308": 2019
+      },
+      {
+        "31579200": 2019
+      },
+      {
+        "32033429": 2020
+      },
+      {
+        "35752305": 2022
+      },
+      {
+        "38438175": 2024
+      },
+      {
+        "31185938": 2019
+      },
+      {
+        "36600533": 2023
+      },
+      {
+        "36980790": 2023
+      },
+      {
+        "40247746": 2025
+      },
+      {
+        "33222157": 2021
+      }
+    ],
+    "citedPmids": [
+      11870167,
+      20839002,
+      16184510,
+      23006973,
+      11169340,
+      18990435,
+      24322510,
+      20818904,
+      20833850,
+      12507954,
+      21898632,
+      22266934,
+      19189349,
+      12507953,
+      25980344,
+      19395008,
+      19620444,
+      24183551,
+      17335018,
+      21913276,
+      24219974,
+      7165009,
+      10831697,
+      24846098,
+      11041682
+    ],
+    "citingClinicalPmids": [
+      39393218,
+      30686729,
+      35752305,
+      31185938,
+      40247746
+    ],
+    "ecr": 2.453299779155748,
+    "fcr": 4.902819695434585,
+    "nihRcrPercentile": 63.3,
+    "rcr": 1.4266499470376395,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "27177278": {
+    "_id": "27177278",
+    "authors": [
+      {
+        "lastName": "Rodríguez-Trujillo",
+        "fullName": "Rodríguez-Trujillo, Adriano",
+        "firstName": "Adriano"
+      },
+      {
+        "lastName": "Martínez-Serrano",
+        "fullName": "Martínez-Serrano, María José",
+        "firstName": "María José"
+      },
+      {
+        "lastName": "Martínez-Román",
+        "fullName": "Martínez-Román, Sergio",
+        "firstName": "Sergio"
+      },
+      {
+        "lastName": "Martí",
+        "fullName": "Martí, Cristina",
+        "firstName": "Cristina"
+      },
+      {
+        "lastName": "Buñesch",
+        "fullName": "Buñesch, Laura",
+        "firstName": "Laura"
+      },
+      {
+        "lastName": "Nicolau",
+        "fullName": "Nicolau, Carlos",
+        "firstName": "Carlos"
+      },
+      {
+        "lastName": "Pahisa",
+        "fullName": "Pahisa, Jaume",
+        "firstName": "Jaume"
+      }
+    ],
+    "doi": "10.1097/IGC.0000000000000724",
+    "iCiteArticle": true,
+    "journalNameIso": "Int J Gynecol Cancer",
+    "pmid": 27177278,
+    "pubYear": 2016,
+    "title": "Preoperative Assessment of Myometrial Invasion in Endometrial Cancer by 3D Ultrasound and Diffusion-Weighted Magnetic Resonance Imaging: A Comparative Study.",
+    "acr": 2.6666666666666665,
+    "citedByPmidCount": 24,
+    "citedByPmids": [
+      28782618,
+      28441254,
+      33604759,
+      36088040,
+      33205640,
+      33291658,
+      33712263,
+      33205638,
+      36756380,
+      32689770,
+      37010330,
+      28594645,
+      36746507,
+      29995239,
+      36359447,
+      40215804,
+      32351565,
+      30029961,
+      39773665,
+      38438175,
+      35656849,
+      36739613,
+      28718876,
+      32377553
+    ],
+    "citedPmids": [
+      23508278,
+      16051415,
+      3652025,
+      16084259,
+      16445663,
+      2775686,
+      21270621,
+      25950131,
+      18304622,
+      22119292,
+      19193243,
+      19164122,
+      18368415,
+      24361579,
+      24257555,
+      18398585,
+      24699937,
+      18046564,
+      24668009,
+      22548292,
+      16055605,
+      19070889,
+      24471896,
+      19367689,
+      6728365,
+      20638109,
+      23680520,
+      16677594,
+      25227791,
+      8752246,
+      15581947,
+      11041682
+    ],
+    "ecr": 2.2230333424380024,
+    "fcr": 4.552726614036596,
+    "rcr": 1.1995621548987345,
+    "animal": 0.0,
+    "apt": 0.75,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "28782618": 2018
+      },
+      {
+        "28441254": 2017
+      },
+      {
+        "33604759": 2021
+      },
+      {
+        "36088040": 2022
+      },
+      {
+        "33205640": 2021
+      },
+      {
+        "33291658": 2020
+      },
+      {
+        "33712263": 2021
+      },
+      {
+        "33205638": 2021
+      },
+      {
+        "36756380": 2023
+      },
+      {
+        "32689770": 2020
+      },
+      {
+        "37010330": 2023
+      },
+      {
+        "28594645": 2017
+      },
+      {
+        "36746507": 2023
+      },
+      {
+        "29995239": 2019
+      },
+      {
+        "36359447": 2022
+      },
+      {
+        "40215804": 2025
+      },
+      {
+        "32351565": 2020
+      },
+      {
+        "30029961": 2018
+      },
+      {
+        "39773665": 2025
+      },
+      {
+        "38438175": 2024
+      },
+      {
+        "35656849": 2022
+      },
+      {
+        "36739613": 2023
+      },
+      {
+        "28718876": 2017
+      },
+      {
+        "32377553": 2020
+      }
+    ],
+    "nihRcrPercentile": 57.0,
+    "citingClinicalPmids": [
+      33604759
+    ],
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": true,
+    "rcrIsProvisional": false
+  },
+  "27569070": {
+    "_id": "27569070",
+    "authors": [
+      {
+        "lastName": "Aracki-Trenkic",
+        "fullName": "Aracki-Trenkic, Aleksandra",
+        "firstName": "Aleksandra"
+      },
+      {
+        "lastName": "Stojanov",
+        "fullName": "Stojanov, Dragan",
+        "firstName": "Dragan"
+      },
+      {
+        "lastName": "Petric",
+        "fullName": "Petric, Aleksandra",
+        "firstName": "Aleksandra"
+      },
+      {
+        "lastName": "Benedeto-Stojanov",
+        "fullName": "Benedeto-Stojanov, Daniela",
+        "firstName": "Daniela"
+      },
+      {
+        "lastName": "Trenkic",
+        "fullName": "Trenkic, Milan",
+        "firstName": "Milan"
+      },
+      {
+        "lastName": "Ignjatovic",
+        "fullName": "Ignjatovic, Jelena",
+        "firstName": "Jelena"
+      }
+    ],
+    "doi": null,
+    "iCiteArticle": false,
+    "journalNameIso": "J BUON",
+    "pmid": 27569070,
+    "pubYear": 2016,
+    "title": "The role of magnetic resonance imaging in the evaluation of endometrial carcinoma.",
+    "acr": 0.4444444444444444,
+    "citedByPmidCount": 4,
+    "citedByPmids": [
+      30371608,
+      29246587,
+      37064373,
+      32366933
+    ],
+    "citedPmids": [
+      10751466,
+      18212237,
+      21512093,
+      16199623,
+      19194709,
+      7824739,
+      18199437,
+      22236905,
+      15661684,
+      17515380,
+      20968141,
+      9022575,
+      14736670,
+      15031434,
+      16359925,
+      19345353,
+      7560323,
+      17925543,
+      10924568,
+      19070889,
+      17095081,
+      15738027,
+      17219142,
+      18398926,
+      11382943,
+      1989916,
+      20804553,
+      20124189,
+      11277658,
+      22006756
+    ],
+    "ecr": 1.93868817230493,
+    "fcr": 3.72238060296551,
+    "rcr": 0.2292500933329773,
+    "animal": 0.0,
+    "apt": 0.25,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "30371608": 2019
+      },
+      {
+        "29246587": 2018
+      },
+      {
+        "37064373": 2023
+      },
+      {
+        "32366933": 2020
+      }
+    ],
+    "nihRcrPercentile": 11.7,
+    "citingClinicalPmids": null,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "27654258": {
+    "_id": "27654258",
+    "authors": [
+      {
+        "lastName": "Lee",
+        "fullName": "Lee, Jisun",
+        "firstName": "Jisun"
+      },
+      {
+        "lastName": "Kong",
+        "fullName": "Kong, Tae-Wook",
+        "firstName": "Tae-Wook"
+      },
+      {
+        "lastName": "Paek",
+        "fullName": "Paek, Jiheum",
+        "firstName": "Jiheum"
+      },
+      {
+        "lastName": "Chang",
+        "fullName": "Chang, Suk-Joon",
+        "firstName": "Suk-Joon"
+      },
+      {
+        "lastName": "Ryu",
+        "fullName": "Ryu, Hee-Sug",
+        "firstName": "Hee-Sug"
+      }
+    ],
+    "doi": "10.1097/IGC.0000000000000820",
+    "iCiteArticle": true,
+    "journalNameIso": "Int J Gynecol Cancer",
+    "pmid": 27654258,
+    "pubYear": 2016,
+    "title": "Predicting Model of Lymph Node Metastasis Using Preoperative Tumor Grade, Transvaginal Ultrasound, and Serum CA-125 Level in Patients With Endometrial Cancer.",
+    "acr": 2.5555555555555554,
+    "citedByPmidCount": 23,
+    "citedByPmids": [
+      34934360,
+      38287783,
+      28471022,
+      38201606,
+      31186375,
+      39219071,
+      34527571,
+      40395329,
+      35225474,
+      34992410,
+      38302726,
+      33808691,
+      38256630,
+      36428723,
+      28624692,
+      35795035,
+      39232912,
+      31435773,
+      36077609,
+      35598153,
+      34422634,
+      34746002,
+      31840873
+    ],
+    "citedPmids": [
+      23200916,
+      3652025,
+      22700443,
+      17313975,
+      14766264,
+      19033573,
+      21846440,
+      22310644,
+      25817745,
+      22412131,
+      21051976,
+      18314512,
+      16977653,
+      20944170,
+      10053111,
+      21489874,
+      11501773,
+      19070889,
+      22237781,
+      18398926,
+      19480246,
+      8430547
+    ],
+    "ecr": 3.027832183433918,
+    "fcr": 6.902903714012828,
+    "rcr": 0.8440215311593837,
+    "animal": 0.0,
+    "apt": 0.75,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "34934360": 2021
+      },
+      {
+        "38287783": 2024
+      },
+      {
+        "28471022": 2017
+      },
+      {
+        "38201606": 2023
+      },
+      {
+        "31186375": 2019
+      },
+      {
+        "39219071": 2024
+      },
+      {
+        "34527571": 2021
+      },
+      {
+        "40395329": 2025
+      },
+      {
+        "35225474": 2022
+      },
+      {
+        "34992410": 2021
+      },
+      {
+        "38302726": 2024
+      },
+      {
+        "33808691": 2021
+      },
+      {
+        "38256630": 2024
+      },
+      {
+        "36428723": 2022
+      },
+      {
+        "28624692": 2017
+      },
+      {
+        "35795035": 2022
+      },
+      {
+        "39232912": 2024
+      },
+      {
+        "31435773": 2019
+      },
+      {
+        "36077609": 2022
+      },
+      {
+        "35598153": 2022
+      },
+      {
+        "34422634": 2021
+      },
+      {
+        "34746002": 2021
+      },
+      {
+        "31840873": 2020
+      }
+    ],
+    "nihRcrPercentile": 44.0,
+    "citingClinicalPmids": null,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "27903466": {
+    "_id": "27903466",
+    "authors": [
+      {
+        "lastName": "Kim",
+        "fullName": "Kim, Young Jae",
+        "firstName": "Young Jae"
+      },
+      {
+        "lastName": "Kim",
+        "fullName": "Kim, Kwang Gi",
+        "firstName": "Kwang Gi"
+      },
+      {
+        "lastName": "Lee",
+        "fullName": "Lee, Sa Ra",
+        "firstName": "Sa Ra"
+      },
+      {
+        "lastName": "Lee",
+        "fullName": "Lee, Seung Hyun",
+        "firstName": "Seung Hyun"
+      },
+      {
+        "lastName": "Kang",
+        "fullName": "Kang, Byung Chul",
+        "firstName": "Byung Chul"
+      }
+    ],
+    "doi": "10.1016/j.jmig.2016.10.021",
+    "iCiteArticle": true,
+    "journalNameIso": "J Minim Invasive Gynecol",
+    "pmid": 27903466,
+    "pubYear": 2017,
+    "title": "Preoperative 3-dimensional Magnetic Resonance Imaging of Uterine Myoma and Endometrium Before Myomectomy.",
+    "acr": 1.0,
+    "citedByPmidCount": 8,
+    "citedByPmids": [
+      34674042,
+      37751897,
+      33153547,
+      37821244,
+      38144535,
+      39729620,
+      39154514,
+      29215821
+    ],
+    "citedPmids": [
+      18328787,
+      12826476,
+      20467825,
+      10489175,
+      24088094,
+      7026295,
+      20884021,
+      1911974,
+      12042254,
+      2196293,
+      11756387,
+      26240782,
+      20591749,
+      23643029,
+      16353655,
+      11277237
+    ],
+    "ecr": 1.5928627925471799,
+    "fcr": 2.7019900044604004,
+    "rcr": 0.6278004638433918,
+    "animal": 0.0,
+    "apt": 0.25,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "34674042": 2021
+      },
+      {
+        "37751897": 2023
+      },
+      {
+        "33153547": 2020
+      },
+      {
+        "37821244": 2024
+      },
+      {
+        "38144535": 2023
+      },
+      {
+        "39729620": 2024
+      },
+      {
+        "39154514": 2024
+      },
+      {
+        "29215821": 2018
+      }
+    ],
+    "nihRcrPercentile": 33.9,
+    "citingClinicalPmids": [
+      33153547
+    ],
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": true,
+    "rcrIsProvisional": false
+  },
+  "28273727": {
+    "_id": "28273727",
+    "authors": [
+      {
+        "lastName": "Du",
+        "fullName": "Du, Lixin",
+        "firstName": "Lixin"
+      },
+      {
+        "lastName": "Yu",
+        "fullName": "Yu, Yongqiang",
+        "firstName": "Yongqiang"
+      },
+      {
+        "lastName": "Wang",
+        "fullName": "Wang, Yuli",
+        "firstName": "Yuli"
+      },
+      {
+        "lastName": "Xia",
+        "fullName": "Xia, Jun",
+        "firstName": "Jun"
+      },
+      {
+        "lastName": "Qiu",
+        "fullName": "Qiu, Xixiong",
+        "firstName": "Xixiong"
+      },
+      {
+        "lastName": "Lei",
+        "fullName": "Lei, Yi",
+        "firstName": "Yi"
+      }
+    ],
+    "doi": "10.1177/0284185116669871",
+    "iCiteArticle": true,
+    "journalNameIso": "Acta Radiol",
+    "pmid": 28273727,
+    "pubYear": 2017,
+    "title": "The diagnostic value of multimodality MRI in endometrial carcinoma staging.",
+    "acr": 0.25,
+    "citedByPmidCount": 2,
+    "citedByPmids": [
+      34306477,
+      28614951
+    ],
+    "citedPmids": [
+      23508278,
+      19750859,
+      21479805,
+      19638859,
+      17365463,
+      26471910,
+      19367689,
+      22114239,
+      19258956,
+      21742787,
+      25635136,
+      19244045,
+      26485119,
+      20598007,
+      19780740,
+      22119292,
+      21701038,
+      22722382,
+      21113597,
+      17537566,
+      20968141
+    ],
+    "ecr": 1.233007496939261,
+    "fcr": 1.781550470416417,
+    "rcr": 0.20275626922024725,
+    "animal": 0.0,
+    "apt": 0.25,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "34306477": 2021
+      },
+      {
+        "28614951": 2018
+      }
+    ],
+    "nihRcrPercentile": 10.2,
+    "citingClinicalPmids": null,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "28557834": {
+    "_id": "28557834",
+    "authors": [
+      {
+        "lastName": "Fanfani",
+        "fullName": "Fanfani, Francesco",
+        "firstName": "Francesco"
+      },
+      {
+        "lastName": "Restaino",
+        "fullName": "Restaino, Stefano",
+        "firstName": "Stefano"
+      },
+      {
+        "lastName": "Cicogna",
+        "fullName": "Cicogna, Stefania",
+        "firstName": "Stefania"
+      },
+      {
+        "lastName": "Petrillo",
+        "fullName": "Petrillo, Marco",
+        "firstName": "Marco"
+      },
+      {
+        "lastName": "Montico",
+        "fullName": "Montico, Marcella",
+        "firstName": "Marcella"
+      },
+      {
+        "lastName": "Perrone",
+        "fullName": "Perrone, Emanuele",
+        "firstName": "Emanuele"
+      },
+      {
+        "lastName": "Radillo",
+        "fullName": "Radillo, Oriano",
+        "firstName": "Oriano"
+      },
+      {
+        "lastName": "De Leo",
+        "fullName": "De Leo, Rossella",
+        "firstName": "Rossella"
+      },
+      {
+        "lastName": "Ceccarello",
+        "fullName": "Ceccarello, Matteo",
+        "firstName": "Matteo"
+      },
+      {
+        "lastName": "Scambia",
+        "fullName": "Scambia, Giovanni",
+        "firstName": "Giovanni"
+      },
+      {
+        "lastName": "Ricci",
+        "fullName": "Ricci, Giuseppe",
+        "firstName": "Giuseppe"
+      }
+    ],
+    "doi": "10.1097/IGC.0000000000001015",
+    "iCiteArticle": true,
+    "journalNameIso": "Int J Gynecol Cancer",
+    "pmid": 28557834,
+    "pubYear": 2017,
+    "title": "Preoperative Serum Human Epididymis Protein 4 Levels in Early Stage Endometrial Cancer: A Prospective Study.",
+    "acr": 1.0,
+    "citedByPmidCount": 8,
+    "citedByPmids": [
+      39399178,
+      33014844,
+      33388311,
+      33807168,
+      40476616,
+      36428723,
+      34527571,
+      31035965
+    ],
+    "citedPmids": [
+      26714944,
+      26838232,
+      19834767,
+      19232699,
+      21720250,
+      26387863,
+      26961924,
+      19818123,
+      25220842,
+      26905211,
+      22835718,
+      26553763,
+      24068567,
+      25577252,
+      24399786,
+      27006490,
+      22854652,
+      1686187,
+      19732003,
+      26747778,
+      24668009,
+      21508690,
+      11855884,
+      22430259,
+      24032654,
+      18495222,
+      22037318
+    ],
+    "ecr": 2.6790084667414904,
+    "fcr": 5.480138417061668,
+    "rcr": 0.37327242986145237,
+    "animal": 0.0,
+    "apt": 0.5,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "39399178": 2024
+      },
+      {
+        "33014844": 2020
+      },
+      {
+        "33388311": 2021
+      },
+      {
+        "33807168": 2021
+      },
+      {
+        "40476616": 2025
+      },
+      {
+        "36428723": 2022
+      },
+      {
+        "34527571": 2021
+      },
+      {
+        "31035965": 2019
+      }
+    ],
+    "nihRcrPercentile": 20.0,
+    "citingClinicalPmids": null,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "28914639": {
+    "_id": "28914639",
+    "authors": [
+      {
+        "lastName": "Xu",
+        "fullName": "Xu, Dianbo",
+        "firstName": "Dianbo"
+      },
+      {
+        "lastName": "Wang",
+        "fullName": "Wang, Danbo",
+        "firstName": "Danbo"
+      },
+      {
+        "lastName": "Wang",
+        "fullName": "Wang, Shuo",
+        "firstName": "Shuo"
+      },
+      {
+        "lastName": "Tian",
+        "fullName": "Tian, Ye",
+        "firstName": "Ye"
+      },
+      {
+        "lastName": "Long",
+        "fullName": "Long, Zaiqiu",
+        "firstName": "Zaiqiu"
+      },
+      {
+        "lastName": "Ren",
+        "fullName": "Ren, Xuemei",
+        "firstName": "Xuemei"
+      }
+    ],
+    "doi": "10.1097/IGC.0000000000001112",
+    "iCiteArticle": true,
+    "journalNameIso": "Int J Gynecol Cancer",
+    "pmid": 28914639,
+    "pubYear": 2017,
+    "title": "Correlation Between Squamous Cell Carcinoma Antigen Level and the Clinicopathological Features of Early-Stage Cervical Squamous Cell Carcinoma and the Predictive Value of Squamous Cell Carcinoma Antigen Combined With Computed Tomography Scan for Lymph Node Metastasis.",
+    "acr": 3.5,
+    "citedByPmidCount": 28,
+    "citedByPmids": [
+      38947896,
+      36172148,
+      35468085,
+      38617514,
+      34830902,
+      37184678,
+      31500891,
+      34414964,
+      37025259,
+      37787289,
+      39193382,
+      39323994,
+      38606495,
+      39040450,
+      32456707,
+      32960673,
+      31416463,
+      30029960,
+      39061181,
+      30128863,
+      32085736,
+      37694613,
+      31481274,
+      33933005,
+      40022054,
+      40615916,
+      40337204,
+      37528338
+    ],
+    "citedPmids": [
+      12027820,
+      25860888,
+      17964182,
+      10954463,
+      17566838,
+      2315503,
+      3121560,
+      10739706,
+      15735121,
+      9159343,
+      6478396,
+      8625184,
+      19051816,
+      8558185,
+      22984670,
+      9202586,
+      23063760,
+      10696963,
+      1389488,
+      24407577,
+      10785483,
+      11777619,
+      26107230,
+      16803491,
+      2227547,
+      19007978,
+      9570978,
+      1704354,
+      16048726,
+      26667886,
+      17343571,
+      11579117,
+      20207771
+    ],
+    "ecr": 2.6427319891132637,
+    "fcr": 5.38735027534911,
+    "rcr": 1.3243870412959968,
+    "animal": 0.0,
+    "apt": 0.75,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "38947896": 2024
+      },
+      {
+        "36172148": 2022
+      },
+      {
+        "35468085": 2022
+      },
+      {
+        "38617514": 2024
+      },
+      {
+        "34830902": 2021
+      },
+      {
+        "37184678": 2023
+      },
+      {
+        "31500891": 2019
+      },
+      {
+        "34414964": 2021
+      },
+      {
+        "37025259": 2023
+      },
+      {
+        "37787289": 2023
+      },
+      {
+        "39193382": 2024
+      },
+      {
+        "39323994": 2024
+      },
+      {
+        "38606495": 2024
+      },
+      {
+        "39040450": 2024
+      },
+      {
+        "32456707": 2020
+      },
+      {
+        "32960673": 2020
+      },
+      {
+        "31416463": 2019
+      },
+      {
+        "30029960": 2019
+      },
+      {
+        "39061181": 2024
+      },
+      {
+        "30128863": 2018
+      },
+      {
+        "32085736": 2020
+      },
+      {
+        "37694613": 2024
+      },
+      {
+        "31481274": 2020
+      },
+      {
+        "33933005": 2021
+      },
+      {
+        "40022054": 2025
+      },
+      {
+        "40615916": 2025
+      },
+      {
+        "40337204": 2023
+      },
+      {
+        "37528338": 2023
+      }
+    ],
+    "nihRcrPercentile": 60.6,
+    "citingClinicalPmids": [
+      32456707,
+      32085736
+    ],
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": true,
+    "rcrIsProvisional": false
+  },
+  "29472031": {
+    "_id": "29472031",
+    "authors": [
+      {
+        "lastName": "Lavaud",
+        "fullName": "Lavaud, P",
+        "firstName": "P"
+      },
+      {
+        "lastName": "Fedida",
+        "fullName": "Fedida, B",
+        "firstName": "B"
+      },
+      {
+        "lastName": "Canlorbe",
+        "fullName": "Canlorbe, G",
+        "firstName": "G"
+      },
+      {
+        "lastName": "Bendifallah",
+        "fullName": "Bendifallah, S",
+        "firstName": "S"
+      },
+      {
+        "lastName": "Darai",
+        "fullName": "Darai, E",
+        "firstName": "E"
+      },
+      {
+        "lastName": "Thomassin-Naggara",
+        "fullName": "Thomassin-Naggara, I",
+        "firstName": "I"
+      }
+    ],
+    "doi": "10.1016/j.diii.2018.01.010",
+    "iCiteArticle": true,
+    "journalNameIso": "Diagn Interv Imaging",
+    "pmid": 29472031,
+    "pubYear": 2018,
+    "title": "Preoperative MR imaging for ESMO-ESGO-ESTRO classification of endometrial cancer.",
+    "acr": 4.857142857142857,
+    "citedByPmidCount": 34,
+    "citedByPmids": [
+      33534780,
+      37519747,
+      36192204,
+      34859689,
+      34386425,
+      37312525,
+      39198759,
+      39569550,
+      39615611,
+      37655105,
+      37068415,
+      39358650,
+      39360502,
+      40507676,
+      32337640,
+      38836884,
+      34137929,
+      33713972,
+      38824215,
+      37101417,
+      33403030,
+      32681608,
+      37751166,
+      32673928,
+      32037289,
+      37925611,
+      32749583,
+      33908709,
+      39364314,
+      37564444,
+      34422589,
+      34111974,
+      40561675,
+      31648773
+    ],
+    "citedPmids": [
+      24851606,
+      19033573,
+      24548726,
+      13709911,
+      25952272,
+      24809776,
+      28493790,
+      26332387,
+      21896664,
+      20091639,
+      21697683,
+      23085458,
+      21701038,
+      25355598,
+      10871473,
+      21489874,
+      22325661,
+      19448114,
+      25869227,
+      15721428,
+      26354523,
+      15755004,
+      19367689,
+      19070889,
+      14984936,
+      24590269,
+      25928157,
+      6728365,
+      25628109,
+      24969441,
+      24078661,
+      21912633,
+      25651787,
+      23122929,
+      27916168,
+      26634381
+    ],
+    "ecr": 3.174808540094547,
+    "fcr": 6.504017752920446,
+    "rcr": 1.5299010305037826,
+    "animal": 0.0,
+    "apt": 0.75,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "33534780": 2021
+      },
+      {
+        "37519747": 2023
+      },
+      {
+        "36192204": 2023
+      },
+      {
+        "34859689": 2022
+      },
+      {
+        "34386425": 2021
+      },
+      {
+        "37312525": 2023
+      },
+      {
+        "39198759": 2024
+      },
+      {
+        "39569550": 2025
+      },
+      {
+        "39615611": 2025
+      },
+      {
+        "37655105": 2023
+      },
+      {
+        "37068415": 2023
+      },
+      {
+        "39358650": 2024
+      },
+      {
+        "39360502": 2024
+      },
+      {
+        "40507676": 2025
+      },
+      {
+        "32337640": 2020
+      },
+      {
+        "38836884": 2024
+      },
+      {
+        "34137929": 2022
+      },
+      {
+        "33713972": 2021
+      },
+      {
+        "38824215": 2024
+      },
+      {
+        "37101417": 2024
+      },
+      {
+        "33403030": 2021
+      },
+      {
+        "32681608": 2020
+      },
+      {
+        "37751166": 2023
+      },
+      {
+        "32673928": 2020
+      },
+      {
+        "32037289": 2020
+      },
+      {
+        "37925611": 2024
+      },
+      {
+        "32749583": 2021
+      },
+      {
+        "33908709": 2021
+      },
+      {
+        "39364314": 2024
+      },
+      {
+        "37564444": 2023
+      },
+      {
+        "34422589": 2021
+      },
+      {
+        "34111974": 2021
+      },
+      {
+        "40561675": 2025
+      },
+      {
+        "31648773": 2020
+      }
+    ],
+    "nihRcrPercentile": 65.8,
+    "citingClinicalPmids": [
+      36192204
+    ],
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": true,
+    "rcrIsProvisional": false
+  },
+  "29994911": {
+    "_id": "29994911",
+    "authors": [
+      {
+        "lastName": "Momtahan",
+        "fullName": "Momtahan, Mozhdeh",
+        "firstName": "Mozhdeh"
+      },
+      {
+        "lastName": "Hosseini",
+        "fullName": "Hosseini, Marjan",
+        "firstName": "Marjan"
+      },
+      {
+        "lastName": "Robati",
+        "fullName": "Robati, Minoo",
+        "firstName": "Minoo"
+      },
+      {
+        "lastName": "Najib",
+        "fullName": "Najib, Fatemesadat",
+        "firstName": "Fatemesadat"
+      }
+    ],
+    "doi": "10.1097/IGC.0000000000001301",
+    "iCiteArticle": true,
+    "journalNameIso": "Int J Gynecol Cancer",
+    "pmid": 29994911,
+    "pubYear": 2018,
+    "title": "Predictive Value of Kanagawa Cancer Center Scoring System for Lymph Node Metastasis and Need for Lymphadenectomy in Patients With Endometrial Cancer: A Validation Study.",
+    "acr": 0.7142857142857143,
+    "citedByPmidCount": 5,
+    "citedByPmids": [
+      37815156,
+      31186375,
+      36077609,
+      32844525,
+      36033437
+    ],
+    "citedPmids": [
+      23845691,
+      27268220,
+      29200010,
+      21757932,
+      17097721,
+      2775686,
+      25142623,
+      29285310,
+      11745815,
+      19367689,
+      26742998,
+      19484311,
+      25637502,
+      29194192,
+      19765806,
+      22771890,
+      3287615,
+      19590722,
+      12468325,
+      20964550
+    ],
+    "ecr": 3.6771732243536284,
+    "fcr": 7.695765017536589,
+    "rcr": 0.19424859007322698,
+    "animal": 0.0,
+    "apt": 0.25,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "37815156": 2024
+      },
+      {
+        "31186375": 2019
+      },
+      {
+        "36077609": 2022
+      },
+      {
+        "32844525": 2020
+      },
+      {
+        "36033437": 2022
+      }
+    ],
+    "nihRcrPercentile": 9.8,
+    "citingClinicalPmids": null,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "30039225": {
+    "_id": "30039225",
+    "authors": [
+      {
+        "lastName": "Yan",
+        "fullName": "Yan, Bin",
+        "firstName": "Bin"
+      },
+      {
+        "lastName": "Liang",
+        "fullName": "Liang, Xiufen",
+        "firstName": "Xiufen"
+      },
+      {
+        "lastName": "Zhao",
+        "fullName": "Zhao, Tingting",
+        "firstName": "Tingting"
+      },
+      {
+        "lastName": "Niu",
+        "fullName": "Niu, Chen",
+        "firstName": "Chen"
+      },
+      {
+        "lastName": "Ding",
+        "fullName": "Ding, Caixia",
+        "firstName": "Caixia"
+      },
+      {
+        "lastName": "Liu",
+        "fullName": "Liu, Wenjun",
+        "firstName": "Wenjun"
+      }
+    ],
+    "doi": "10.1007/s00330-018-5653-2",
+    "iCiteArticle": true,
+    "journalNameIso": "Eur Radiol",
+    "pmid": 30039225,
+    "pubYear": 2019,
+    "title": "Preoperative prediction of deep myometrial invasion and tumor grade for stage I endometrioid adenocarcinoma: a simple method of measurement on DWI.",
+    "acr": 2.3333333333333335,
+    "citedByPmidCount": 14,
+    "citedByPmids": [
+      33793008,
+      37751166,
+      39615611,
+      35778306,
+      34182801,
+      37068415,
+      38021155,
+      36918859,
+      37014376,
+      39364314,
+      34022489,
+      35795827,
+      39313384,
+      38343262
+    ],
+    "citedPmids": [
+      16084259,
+      28696169,
+      25639620,
+      19033573,
+      23150461,
+      17729360,
+      19194709,
+      27714421,
+      21896664,
+      19244045,
+      22008707,
+      21701038,
+      27743019,
+      25608571,
+      24316663,
+      26724655,
+      24668009,
+      27829198,
+      23954595,
+      25928157,
+      26486600,
+      25287060,
+      26045311,
+      25545203,
+      25332442,
+      27157039
+    ],
+    "ecr": 3.3814966388738417,
+    "fcr": 6.763983047047335,
+    "rcr": 0.6900297656692086,
+    "animal": 0.0,
+    "apt": 0.5,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "citedByPmidsByYear": [
+      {
+        "33793008": 2021
+      },
+      {
+        "37751166": 2023
+      },
+      {
+        "39615611": 2025
+      },
+      {
+        "35778306": 2023
+      },
+      {
+        "34182801": 2022
+      },
+      {
+        "37068415": 2023
+      },
+      {
+        "38021155": 2023
+      },
+      {
+        "36918859": 2023
+      },
+      {
+        "37014376": 2023
+      },
+      {
+        "39364314": 2024
+      },
+      {
+        "34022489": 2021
+      },
+      {
+        "35795827": 2022
+      },
+      {
+        "39313384": 2024
+      },
+      {
+        "38343262": 2024
+      }
+    ],
+    "nihRcrPercentile": 36.9,
+    "citingClinicalPmids": null,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "30527303": {
+    "_id": "30527303",
+    "authors": [
+      {
+        "lastName": "Joo",
+        "fullName": "Joo, Hae Lee",
+        "firstName": "Hae Lee"
+      },
+      {
+        "lastName": "Shin",
+        "fullName": "Shin, Yu Ri",
+        "firstName": "Yu Ri"
+      },
+      {
+        "lastName": "Rha",
+        "fullName": "Rha, Sung Eun",
+        "firstName": "Sung Eun"
+      },
+      {
+        "lastName": "Park",
+        "fullName": "Park, Chang Suk",
+        "firstName": "Chang Suk"
+      },
+      {
+        "lastName": "Shim",
+        "fullName": "Shim, Dong Jae",
+        "firstName": "Dong Jae"
+      },
+      {
+        "lastName": "Kim",
+        "fullName": "Kim, Kijun",
+        "firstName": "Kijun"
+      }
+    ],
+    "doi": "10.1016/j.ejrad.2018.10.021",
+    "iCiteArticle": true,
+    "journalNameIso": "Eur J Radiol",
+    "pmid": 30527303,
+    "pubYear": 2018,
+    "title": "Preoperative discrimination of tumour stage in clear cell carcinoma of the ovary using computed tomography and magnetic resonance imaging.",
+    "acr": 0.7142857142857143,
+    "citedByPmidCount": 5,
+    "citedByPmids": [
+      38824600,
+      39881050,
+      34247767,
+      37478617,
+      32424610
+    ],
+    "citedByPmidsByYear": [
+      {
+        "38824600": 2024
+      },
+      {
+        "39881050": 2025
+      },
+      {
+        "34247767": 2021
+      },
+      {
+        "37478617": 2023
+      },
+      {
+        "32424610": 2021
+      }
+    ],
+    "citedPmids": [
+      17018684,
+      15882166,
+      19922988,
+      16641903,
+      18639330,
+      25341576,
+      21479128,
+      21276610,
+      27377917,
+      11044056,
+      17082688,
+      22525820,
+      15990161,
+      18395777,
+      11419167,
+      20093596,
+      27167231,
+      16290000,
+      17014897,
+      23830352,
+      17211468,
+      25680339,
+      8631545,
+      12468346,
+      17408726
+    ],
+    "ecr": 4.580680821799264,
+    "fcr": 9.83913365302059,
+    "nihRcrPercentile": 7.7,
+    "rcr": 0.15593439972644657,
+    "animal": 0.0,
+    "apt": 0.5,
+    "citingClinicalPmids": null,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "31084761": {
+    "_id": "31084761",
+    "authors": [
+      {
+        "lastName": "Lindgren",
+        "fullName": "Lindgren, Auni",
+        "firstName": "Auni"
+      },
+      {
+        "lastName": "Anttila",
+        "fullName": "Anttila, Maarit",
+        "firstName": "Maarit"
+      },
+      {
+        "lastName": "Arponen",
+        "fullName": "Arponen, Otso",
+        "firstName": "Otso"
+      },
+      {
+        "lastName": "Rautiainen",
+        "fullName": "Rautiainen, Suvi",
+        "firstName": "Suvi"
+      },
+      {
+        "lastName": "Könönen",
+        "fullName": "Könönen, Mervi",
+        "firstName": "Mervi"
+      },
+      {
+        "lastName": "Vanninen",
+        "fullName": "Vanninen, Ritva",
+        "firstName": "Ritva"
+      },
+      {
+        "lastName": "Sallinen",
+        "fullName": "Sallinen, Hanna",
+        "firstName": "Hanna"
+      }
+    ],
+    "doi": "10.1016/j.ejrad.2019.03.023",
+    "iCiteArticle": true,
+    "journalNameIso": "Eur J Radiol",
+    "pmid": 31084761,
+    "pubYear": 2019,
+    "title": "Prognostic value of preoperative dynamic contrast-enhanced magnetic resonance imaging in epithelial ovarian cancer.",
+    "acr": 3.0,
+    "citedByPmidCount": 18,
+    "citedByPmids": [
+      32446435,
+      35884572,
+      31437208,
+      34120235,
+      34259544,
+      37320880,
+      39518010,
+      32366274,
+      36900244,
+      32446430,
+      34089360,
+      35626067,
+      39594694,
+      39287165,
+      35504676,
+      37005578,
+      40294766,
+      32650993
+    ],
+    "citedByPmidsByYear": [
+      {
+        "32446435": 2020
+      },
+      {
+        "35884572": 2022
+      },
+      {
+        "31437208": 2019
+      },
+      {
+        "34120235": 2021
+      },
+      {
+        "34259544": 2021
+      },
+      {
+        "37320880": 2023
+      },
+      {
+        "39518010": 2024
+      },
+      {
+        "32366274": 2020
+      },
+      {
+        "36900244": 2023
+      },
+      {
+        "32446430": 2020
+      },
+      {
+        "34089360": 2021
+      },
+      {
+        "35626067": 2022
+      },
+      {
+        "39594694": 2024
+      },
+      {
+        "39287165": 2024
+      },
+      {
+        "35504676": 2022
+      },
+      {
+        "37005578": 2023
+      },
+      {
+        "40294766": 2025
+      },
+      {
+        "32650993": 2020
+      }
+    ],
+    "citedPmids": [
+      22332064,
+      18458244,
+      24853849,
+      22671573,
+      27770228,
+      24758681,
+      28289945,
+      12202701,
+      28734146,
+      22392859,
+      22207304,
+      29620604,
+      22105841,
+      28449009,
+      24211260,
+      28289938,
+      2480145,
+      30728757,
+      28036342,
+      23093486,
+      19189349,
+      7776889,
+      18602670,
+      23065859,
+      22095438,
+      21502383,
+      27578047,
+      28088245,
+      18194690,
+      20351070,
+      8760716,
+      22217906,
+      30577820,
+      25623826,
+      7541612,
+      24078660
+    ],
+    "ecr": 3.226553492823367,
+    "fcr": 6.416517575821281,
+    "nihRcrPercentile": 47.5,
+    "rcr": 0.9297846778839165,
+    "animal": 0.0,
+    "apt": 0.75,
+    "citingClinicalPmids": null,
+    "human": 1.0,
+    "molCell": 0.0,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "isClinicalArticle": false,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "31328454": {
+    "_id": "31328454",
+    "authors": [
+      {
+        "lastName": "Reijnen",
+        "fullName": "Reijnen, Casper",
+        "firstName": "Casper"
+      },
+      {
+        "lastName": "Visser",
+        "fullName": "Visser, Nicole Cm",
+        "firstName": "Nicole Cm"
+      },
+      {
+        "lastName": "Kasius",
+        "fullName": "Kasius, Jenneke C",
+        "firstName": "Jenneke C"
+      },
+      {
+        "lastName": "Boll",
+        "fullName": "Boll, Dorry",
+        "firstName": "Dorry"
+      },
+      {
+        "lastName": "Geomini",
+        "fullName": "Geomini, Peggy M",
+        "firstName": "Peggy M"
+      },
+      {
+        "lastName": "Ngo",
+        "fullName": "Ngo, Huy",
+        "firstName": "Huy"
+      },
+      {
+        "lastName": "Van Hamont",
+        "fullName": "Van Hamont, Dennis",
+        "firstName": "Dennis"
+      },
+      {
+        "lastName": "Pijlman",
+        "fullName": "Pijlman, Brenda M",
+        "firstName": "Brenda M"
+      },
+      {
+        "lastName": "Vos",
+        "fullName": "Vos, Maria Caroline",
+        "firstName": "Maria Caroline"
+      },
+      {
+        "lastName": "Bulten",
+        "fullName": "Bulten, Johan",
+        "firstName": "Johan"
+      },
+      {
+        "lastName": "Snijders",
+        "fullName": "Snijders, Marc Plm",
+        "firstName": "Marc Plm"
+      },
+      {
+        "lastName": "Massuger",
+        "fullName": "Massuger, Leon Fag",
+        "firstName": "Leon Fag"
+      },
+      {
+        "lastName": "Pijnenborg",
+        "fullName": "Pijnenborg, Johanna Ma",
+        "firstName": "Johanna Ma"
+      }
+    ],
+    "doi": "10.3802/jgo.2019.30.e70",
+    "iCiteArticle": true,
+    "journalNameIso": "J Gynecol Oncol",
+    "pmid": 31328454,
+    "pubYear": 2019,
+    "title": "Improved preoperative risk stratification with CA-125 in low-grade endometrial cancer: a multicenter prospective cohort study.",
+    "acr": 5.666666666666667,
+    "animal": 0.0,
+    "apt": 0.75,
+    "citedByPmidCount": 34,
+    "citedByPmids": [
+      32381512,
+      38775501,
+      39906656,
+      40344965,
+      40427176,
+      38973690,
+      34527571,
+      39732615,
+      34356280,
+      35530346,
+      38489719,
+      36766504,
+      36428723,
+      34584444,
+      31997106,
+      35223931,
+      35575391,
+      39740305,
+      31328464,
+      37584221,
+      34991426,
+      36386586,
+      33441576,
+      32979897,
+      38056021,
+      36453189,
+      39492906,
+      37643918,
+      34203959,
+      37270918,
+      37174070,
+      31813586,
+      33361739,
+      38001961
+    ],
+    "citedByPmidsByYear": [
+      {
+        "32381512": 2020
+      },
+      {
+        "38775501": 2024
+      },
+      {
+        "39906656": 2025
+      },
+      {
+        "40344965": 2025
+      },
+      {
+        "40427176": 2025
+      },
+      {
+        "38973690": 2024
+      },
+      {
+        "34527571": 2021
+      },
+      {
+        "39732615": 2025
+      },
+      {
+        "34356280": 2021
+      },
+      {
+        "35530346": 2022
+      },
+      {
+        "38489719": 2024
+      },
+      {
+        "36766504": 2023
+      },
+      {
+        "36428723": 2022
+      },
+      {
+        "34584444": 2021
+      },
+      {
+        "31997106": 2020
+      },
+      {
+        "35223931": 2022
+      },
+      {
+        "35575391": 2022
+      },
+      {
+        "39740305": 2025
+      },
+      {
+        "31328464": 2019
+      },
+      {
+        "37584221": 2023
+      },
+      {
+        "34991426": 2022
+      },
+      {
+        "36386586": 2022
+      },
+      {
+        "33441576": 2021
+      },
+      {
+        "32979897": 2021
+      },
+      {
+        "38056021": 2024
+      },
+      {
+        "36453189": 2023
+      },
+      {
+        "39492906": 2024
+      },
+      {
+        "37643918": 2023
+      },
+      {
+        "34203959": 2021
+      },
+      {
+        "37270918": 2023
+      },
+      {
+        "37174070": 2023
+      },
+      {
+        "31813586": 2020
+      },
+      {
+        "33361739": 2020
+      },
+      {
+        "38001961": 2023
+      }
+    ],
+    "citedPmids": [
+      19443392,
+      16546343,
+      3652025,
+      27505134,
+      21872750,
+      22412131,
+      22453859,
+      26387863,
+      24905773,
+      8088605,
+      21296855,
+      12748496,
+      28885397,
+      26807569,
+      25064587,
+      20541245,
+      26011665,
+      23932335,
+      23764931,
+      12079296,
+      25467404,
+      25092412,
+      26683800,
+      24668009,
+      23781004,
+      9277659,
+      23176760,
+      29803268,
+      26123742,
+      24032654,
+      11855884,
+      24293380,
+      15738538,
+      29796179
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 3.50839630374379,
+    "fcr": 7.048560022385767,
+    "human": 1.0,
+    "molCell": 0.0,
+    "nihRcrPercentile": 67.6,
+    "rcr": 1.6151729098049155,
+    "xCoord": 0.0,
+    "yCoord": 1.0,
+    "isClinicalArticle": true,
+    "citedByClinicalArticle": false,
+    "rcrIsProvisional": false
+  },
+  "32200352": {
+    "_id": "32200352",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Togami",
+        "fullName": "Togami, Shinichi",
+        "firstName": "Shinichi"
+      },
+      {
+        "lastName": "Kawamura",
+        "fullName": "Kawamura, Toshihiko",
+        "firstName": "Toshihiko"
+      },
+      {
+        "lastName": "Yanazume",
+        "fullName": "Yanazume, Shintaro",
+        "firstName": "Shintaro"
+      },
+      {
+        "lastName": "Kamio",
+        "fullName": "Kamio, Masaki",
+        "firstName": "Masaki"
+      },
+      {
+        "lastName": "Kobayashi",
+        "fullName": "Kobayashi, Hiroaki",
+        "firstName": "Hiroaki"
+      }
+    ],
+    "doi": "10.1136/ijgc-2019-001154",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Int J Gynecol Cancer",
+    "molCell": 0.0,
+    "pmid": 32200352,
+    "pubYear": 2020,
+    "title": "Comparison of lymphoscintigraphy and single photon emission computed tomography with computed tomography (SPECT/CT) for sentinel lymph node detection in endometrial cancer.",
+    "acr": 1.8,
+    "apt": 0.5,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 9,
+    "citedByPmids": [
+      38152100,
+      35831676,
+      39988469,
+      40635985,
+      34718651,
+      36414716,
+      40551949,
+      37332155,
+      36234387
+    ],
+    "citedByPmidsByYear": [
+      {
+        "38152100": 2023
+      },
+      {
+        "35831676": 2022
+      },
+      {
+        "39988469": 2025
+      },
+      {
+        "40635985": 2025
+      },
+      {
+        "34718651": 2022
+      },
+      {
+        "36414716": 2022
+      },
+      {
+        "40551949": 2025
+      },
+      {
+        "37332155": 2023
+      },
+      {
+        "36234387": 2022
+      }
+    ],
+    "citedPmids": [
+      24823647,
+      19033573,
+      23677759,
+      23542912,
+      23376806,
+      28942993,
+      27815812,
+      30125949,
+      21215440,
+      28374119,
+      12477472,
+      28159465,
+      21489874,
+      26438438,
+      20117827,
+      17885588,
+      25723779,
+      20188410,
+      30902369,
+      18478289,
+      21490727,
+      22617479,
+      19070889,
+      26270124,
+      23067525,
+      27894166,
+      28528918,
+      29056441
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 2.5671350372757002,
+    "fcr": 5.008107923131071,
+    "nihRcrPercentile": 37.5,
+    "rcr": 0.7011707502189676,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "32842057": {
+    "_id": "32842057",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Saleh",
+        "fullName": "Saleh, Mohammed",
+        "firstName": "Mohammed"
+      },
+      {
+        "lastName": "Virarkar",
+        "fullName": "Virarkar, Mayur",
+        "firstName": "Mayur"
+      },
+      {
+        "lastName": "Bhosale",
+        "fullName": "Bhosale, Priya",
+        "firstName": "Priya"
+      },
+      {
+        "lastName": "Elsherif",
+        "fullName": "Elsherif, Sherif",
+        "firstName": "Sherif"
+      },
+      {
+        "lastName": "Javadi",
+        "fullName": "Javadi, Sanaz",
+        "firstName": "Sanaz"
+      },
+      {
+        "lastName": "Faria",
+        "fullName": "Faria, Silvana C",
+        "firstName": "Silvana C"
+      }
+    ],
+    "doi": "10.1097/RCT.0000000000001025",
+    "human": 1.0,
+    "iCiteArticle": false,
+    "isClinicalArticle": false,
+    "journalNameIso": "J Comput Assist Tomogr",
+    "molCell": 0.0,
+    "pmid": 32842057,
+    "pubYear": 2020,
+    "title": "Endometrial Cancer, the Current International Federation of Gynecology and Obstetrics Staging System, and the Role of Imaging.",
+    "acr": 3.2,
+    "apt": 0.75,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 16,
+    "citedByPmids": [
+      36158121,
+      34298609,
+      36478908,
+      36238403,
+      34297164,
+      37600330,
+      39262650,
+      34433451,
+      37573036,
+      36745330,
+      34126988,
+      36552962,
+      36661732,
+      37323245,
+      36088282,
+      38791948
+    ],
+    "citedByPmidsByYear": [
+      {
+        "36158121": 2022
+      },
+      {
+        "34298609": 2021
+      },
+      {
+        "36478908": 2022
+      },
+      {
+        "36238403": 2021
+      },
+      {
+        "34297164": 2021
+      },
+      {
+        "37600330": 2023
+      },
+      {
+        "39262650": 2024
+      },
+      {
+        "34433451": 2021
+      },
+      {
+        "37573036": 2023
+      },
+      {
+        "36745330": 2023
+      },
+      {
+        "34126988": 2021
+      },
+      {
+        "36552962": 2022
+      },
+      {
+        "36661732": 2023
+      },
+      {
+        "37323245": 2023
+      },
+      {
+        "36088282": 2022
+      },
+      {
+        "38791948": 2024
+      }
+    ],
+    "citedPmids": [
+      19443392,
+      17056887,
+      10749149,
+      2775686,
+      29732585,
+      15886951,
+      28402085,
+      10775731,
+      7824739,
+      22821394,
+      17532032,
+      19244045,
+      9006334,
+      30758678,
+      15310772,
+      24472411,
+      25004343,
+      25969637,
+      15837995,
+      23886121,
+      9307275,
+      11382943,
+      10926795,
+      23876490,
+      11395362,
+      20168262,
+      30542793,
+      24078661,
+      16333697,
+      22277287,
+      19403303,
+      16174254,
+      17145260,
+      8646368,
+      26823564,
+      10737792,
+      9809732,
+      27033474,
+      30207593,
+      20373937,
+      10928137,
+      28353197,
+      28050959,
+      18931841,
+      12117193,
+      20005452,
+      9811473,
+      30542488,
+      11431710,
+      24172090,
+      8916382,
+      30620402,
+      24901775,
+      30306580,
+      7560323,
+      30514387,
+      24668009,
+      27532860,
+      29786848,
+      17095081,
+      10679651,
+      18398926,
+      18579191,
+      28376154,
+      29482754,
+      9927063,
+      7742116,
+      10751466,
+      8784468,
+      17291252,
+      17540812,
+      16168841,
+      19033573,
+      28550488,
+      9006324,
+      24010912,
+      28842113,
+      1497800,
+      7590703,
+      14645770,
+      16848724,
+      22008707,
+      21547974,
+      14747944,
+      12635138,
+      8352114,
+      19345353,
+      12797004,
+      22444602,
+      29185901,
+      19070889,
+      20223510,
+      30029961,
+      29683878,
+      15188130,
+      26017734,
+      17901132,
+      18581404,
+      16084259,
+      18386467,
+      12752017,
+      19194709,
+      28493790,
+      7856726,
+      18457596,
+      2028000,
+      8590210,
+      18201753,
+      21898632,
+      19902471,
+      14970275,
+      29449189,
+      26645990,
+      31341726,
+      21695563,
+      14529663,
+      17942100,
+      21606818,
+      10478237,
+      29995239,
+      11585416,
+      19078924,
+      28668163,
+      17527071
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 3.094643737072671,
+    "fcr": 6.2118621867018025,
+    "nihRcrPercentile": 51.5,
+    "rcr": 1.0340447146355494,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "33533532": {
+    "_id": "33533532",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Cubo-Abert",
+        "fullName": "Cubo-Abert, M",
+        "firstName": "M"
+      },
+      {
+        "lastName": "Díaz-Feijoo",
+        "fullName": "Díaz-Feijoo, B",
+        "firstName": "B"
+      },
+      {
+        "lastName": "Bradbury",
+        "fullName": "Bradbury, M",
+        "firstName": "M"
+      },
+      {
+        "lastName": "Rodríguez-Mías",
+        "fullName": "Rodríguez-Mías, N-L",
+        "firstName": "N-L"
+      },
+      {
+        "lastName": "Vera",
+        "fullName": "Vera, M",
+        "firstName": "M"
+      },
+      {
+        "lastName": "Pérez-Hoyos",
+        "fullName": "Pérez-Hoyos, S",
+        "firstName": "S"
+      },
+      {
+        "lastName": "Gómez-Cabeza",
+        "fullName": "Gómez-Cabeza, J-J",
+        "firstName": "J-J"
+      },
+      {
+        "lastName": "Gil-Moreno",
+        "fullName": "Gil-Moreno, A",
+        "firstName": "A"
+      }
+    ],
+    "doi": "10.1002/uog.23607",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": true,
+    "journalNameIso": "Ultrasound Obstet Gynecol",
+    "molCell": 0.0,
+    "pmid": 33533532,
+    "pubYear": 2021,
+    "title": "Diagnostic performance of transvaginal ultrasound and magnetic resonance imaging for preoperative evaluation of low-grade endometrioid endometrial carcinoma: prospective comparative study.",
+    "acr": 5.25,
+    "apt": 0.75,
+    "citedByClinicalArticle": true,
+    "citedByPmidCount": 21,
+    "citedByPmids": [
+      33793008,
+      36656345,
+      37318272,
+      36013217,
+      38473269,
+      37010330,
+      40015330,
+      40167932,
+      38182443,
+      37407192,
+      36746507,
+      35128854,
+      35122158,
+      40215804,
+      40335530,
+      35625496,
+      35656849,
+      36739613,
+      37929250,
+      35148470,
+      36756380
+    ],
+    "citedByPmidsByYear": [
+      {
+        "33793008": 2021
+      },
+      {
+        "36656345": 2023
+      },
+      {
+        "37318272": 2023
+      },
+      {
+        "36013217": 2022
+      },
+      {
+        "38473269": 2024
+      },
+      {
+        "37010330": 2023
+      },
+      {
+        "40015330": 2025
+      },
+      {
+        "40167932": 2025
+      },
+      {
+        "38182443": 2024
+      },
+      {
+        "37407192": 2023
+      },
+      {
+        "36746507": 2023
+      },
+      {
+        "35128854": 2022
+      },
+      {
+        "35122158": 2022
+      },
+      {
+        "40215804": 2025
+      },
+      {
+        "40335530": 2025
+      },
+      {
+        "35625496": 2022
+      },
+      {
+        "35656849": 2022
+      },
+      {
+        "36739613": 2023
+      },
+      {
+        "37929250": 2023
+      },
+      {
+        "35148470": 2022
+      },
+      {
+        "36756380": 2023
+      }
+    ],
+    "citedPmids": [
+      17624085,
+      31912902,
+      16084259,
+      23200916,
+      19644933,
+      31760175,
+      20014360,
+      29732585,
+      31225683,
+      26511519,
+      26197857,
+      29027404,
+      22453859,
+      31375169,
+      10843469,
+      19164122,
+      24281994,
+      26011665,
+      23640790,
+      19820373,
+      30640693,
+      2258078,
+      25010040,
+      8352114,
+      26683800,
+      19345353,
+      7560323,
+      29995239,
+      18398926,
+      31636004,
+      12797005,
+      29439178,
+      8430547,
+      10386329
+    ],
+    "citingClinicalPmids": [
+      35122158
+    ],
+    "ecr": 2.5671880575257617,
+    "fcr": 5.313641313034023,
+    "nihRcrPercentile": 75.2,
+    "rcr": 2.0450391176484026,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "34454623": {
+    "_id": "34454623",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Zhang",
+        "fullName": "Zhang, Linqi",
+        "firstName": "Linqi"
+      },
+      {
+        "lastName": "Long",
+        "fullName": "Long, Xi",
+        "firstName": "Xi"
+      },
+      {
+        "lastName": "Nijiati",
+        "fullName": "Nijiati, Mayidili",
+        "firstName": "Mayidili"
+      },
+      {
+        "lastName": "Zhang",
+        "fullName": "Zhang, Tianhui",
+        "firstName": "Tianhui"
+      },
+      {
+        "lastName": "Li",
+        "fullName": "Li, Mengsi",
+        "firstName": "Mengsi"
+      },
+      {
+        "lastName": "Deng",
+        "fullName": "Deng, Ying",
+        "firstName": "Ying"
+      },
+      {
+        "lastName": "Kuang",
+        "fullName": "Kuang, Sichi",
+        "firstName": "Sichi"
+      },
+      {
+        "lastName": "Xiao",
+        "fullName": "Xiao, Yuanqiang",
+        "firstName": "Yuanqiang"
+      },
+      {
+        "lastName": "Zhu",
+        "fullName": "Zhu, Jie",
+        "firstName": "Jie"
+      },
+      {
+        "lastName": "He",
+        "fullName": "He, Bingjun",
+        "firstName": "Bingjun"
+      },
+      {
+        "lastName": "Chen",
+        "fullName": "Chen, Jingbiao",
+        "firstName": "Jingbiao"
+      },
+      {
+        "lastName": "Rossman",
+        "fullName": "Rossman, Phillip",
+        "firstName": "Phillip"
+      },
+      {
+        "lastName": "Glaser",
+        "fullName": "Glaser, Kevin J",
+        "firstName": "Kevin J"
+      },
+      {
+        "lastName": "Venkatesh",
+        "fullName": "Venkatesh, Sudhakar K",
+        "firstName": "Sudhakar K"
+      },
+      {
+        "lastName": "Ehman",
+        "fullName": "Ehman, Richard L",
+        "firstName": "Richard L"
+      },
+      {
+        "lastName": "Wang",
+        "fullName": "Wang, Jin",
+        "firstName": "Jin"
+      }
+    ],
+    "doi": "10.1186/s40644-021-00420-8",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Cancer Imaging",
+    "molCell": 0.0,
+    "pmid": 34454623,
+    "pubYear": 2021,
+    "title": "Tumor stiffness measured by 3D magnetic resonance elastography can help predict the aggressiveness of endometrial carcinoma: preliminary findings.",
+    "acr": 2.75,
+    "apt": 0.75,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 11,
+    "citedByPmids": [
+      37685274,
+      36897804,
+      38832879,
+      38832881,
+      38368841,
+      38909764,
+      37146780,
+      38484948,
+      37806561,
+      39506537,
+      40062840
+    ],
+    "citedByPmidsByYear": [
+      {
+        "37685274": 2023
+      },
+      {
+        "36897804": 2023
+      },
+      {
+        "38832879": 2024
+      },
+      {
+        "38832881": 2024
+      },
+      {
+        "38368841": 2024
+      },
+      {
+        "38909764": 2024
+      },
+      {
+        "37146780": 2023
+      },
+      {
+        "38484948": 2024
+      },
+      {
+        "37806561": 2023
+      },
+      {
+        "39506537": 2025
+      },
+      {
+        "40062840": 2025
+      }
+    ],
+    "citedPmids": [
+      29137496,
+      23733771,
+      31323325,
+      23904154,
+      32189053,
+      28223730,
+      22453859,
+      31375169,
+      25038856,
+      31809993,
+      15833607,
+      25382459,
+      27845245,
+      31825703,
+      30899404,
+      30612635,
+      32679625,
+      32914909,
+      28445745,
+      29895385,
+      28582348,
+      23408516,
+      20633880,
+      19367689,
+      26538531,
+      29995239,
+      33207095,
+      26711550,
+      24339027,
+      29728125,
+      33516529,
+      30260529,
+      9641222,
+      31199503,
+      31421865,
+      29798909,
+      29313949
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 3.008204633872799,
+    "fcr": 6.475938879993148,
+    "nihRcrPercentile": 46.9,
+    "rcr": 0.914166532766628,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "34729035": {
+    "_id": "34729035",
+    "animal": 0.5,
+    "authors": [
+      {
+        "lastName": "Kaźmierczak",
+        "fullName": "Kaźmierczak, Kamila",
+        "firstName": "Kamila"
+      },
+      {
+        "lastName": "Cholewiński",
+        "fullName": "Cholewiński, Witold",
+        "firstName": "Witold"
+      },
+      {
+        "lastName": "Nowakowski",
+        "fullName": "Nowakowski, Błażej",
+        "firstName": "Błażej"
+      }
+    ],
+    "doi": "10.5114/wo.2021.109209",
+    "human": 0.5,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Contemp Oncol (Pozn)",
+    "molCell": 0.0,
+    "pmid": 34729035,
+    "pubYear": 2021,
+    "title": "Comparison of positron emission tomography with computed tomography examination with histopathological assessment of pelvic lymph nodes in patients with cervical cancer treated surgically.",
+    "acr": 0.5,
+    "apt": 0.25,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 2,
+    "citedByPmids": [
+      39193382,
+      37888330
+    ],
+    "citedByPmidsByYear": [
+      {
+        "39193382": 2024
+      },
+      {
+        "37888330": 2023
+      }
+    ],
+    "citedPmids": [
+      14516547,
+      31383547,
+      17258799,
+      30656645,
+      10926801,
+      27667001,
+      24630859,
+      18843187,
+      12842378,
+      10458216,
+      29728273,
+      15999213,
+      30036243,
+      26194714,
+      30263970,
+      16411226,
+      12468341,
+      31318962,
+      29185901,
+      10094889,
+      17309561,
+      11172956,
+      19184037
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 1.619144228510808,
+    "fcr": 2.8150752841517015,
+    "nihRcrPercentile": 16.3,
+    "rcr": 0.30880510284119045,
+    "rcrIsProvisional": false,
+    "xCoord": 0.4330127018922193,
+    "yCoord": 0.25
+  },
+  "34967506": {
+    "_id": "34967506",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Wu",
+        "fullName": "Wu, Chia-Ying",
+        "firstName": "Chia-Ying"
+      },
+      {
+        "lastName": "Tai",
+        "fullName": "Tai, Yi-Jou",
+        "firstName": "Yi-Jou"
+      },
+      {
+        "lastName": "Shih",
+        "fullName": "Shih, I-Lun",
+        "firstName": "I-Lun"
+      },
+      {
+        "lastName": "Chiang",
+        "fullName": "Chiang, Ying-Cheng",
+        "firstName": "Ying-Cheng"
+      },
+      {
+        "lastName": "Chen",
+        "fullName": "Chen, Yu-Li",
+        "firstName": "Yu-Li"
+      },
+      {
+        "lastName": "Hsu",
+        "fullName": "Hsu, Heng-Cheng",
+        "firstName": "Heng-Cheng"
+      },
+      {
+        "lastName": "Cheng",
+        "fullName": "Cheng, Wen-Fang",
+        "firstName": "Wen-Fang"
+      }
+    ],
+    "doi": "10.1002/cam4.4486",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Cancer Med",
+    "molCell": 0.0,
+    "pmid": 34967506,
+    "pubYear": 2022,
+    "title": "Preoperative magnetic resonance imaging predicts clinicopathological parameters and stages of endometrial carcinomas.",
+    "acr": 2.3333333333333335,
+    "apt": 0.75,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 7,
+    "citedByPmids": [
+      34967506,
+      37183140,
+      37101417,
+      40190927,
+      38342655,
+      38410209,
+      39276192
+    ],
+    "citedByPmidsByYear": [
+      {
+        "34967506": 2022
+      },
+      {
+        "37183140": 2023
+      },
+      {
+        "37101417": 2024
+      },
+      {
+        "40190927": 2025
+      },
+      {
+        "38342655": 2024
+      },
+      {
+        "38410209": 2024
+      },
+      {
+        "39276192": 2025
+      }
+    ],
+    "citedPmids": [
+      23508278,
+      22270280,
+      33538338,
+      30022636,
+      19144394,
+      34967506,
+      28055103,
+      22236905,
+      20495192,
+      30758678,
+      23092060,
+      23727380,
+      30306593,
+      26496578,
+      31231511,
+      17389185,
+      22312525,
+      19345353,
+      26683800,
+      29185901,
+      23431227,
+      23915853,
+      26433666,
+      23200916,
+      23065170,
+      17097721,
+      10216335,
+      15850636,
+      22114239,
+      22119292,
+      23321063,
+      27631107,
+      25608571,
+      15031434,
+      28566221,
+      23251510,
+      30484734,
+      28254229,
+      14728643,
+      22665041,
+      27430321,
+      24852891,
+      29995239,
+      25919115,
+      16697034,
+      17537566
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 3.913045159874252,
+    "fcr": 9.595512780250619,
+    "nihRcrPercentile": 32.3,
+    "rcr": 0.5962960400406717,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "35444870": {
+    "_id": "35444870",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Ali",
+        "fullName": "Ali, Maria",
+        "firstName": "Maria"
+      },
+      {
+        "lastName": "Mumtaz",
+        "fullName": "Mumtaz, Mehwish",
+        "firstName": "Mehwish"
+      },
+      {
+        "lastName": "Naqvi",
+        "fullName": "Naqvi, Zehra",
+        "firstName": "Zehra"
+      },
+      {
+        "lastName": "Farooqui",
+        "fullName": "Farooqui, Rabia",
+        "firstName": "Rabia"
+      },
+      {
+        "lastName": "Shah",
+        "fullName": "Shah, Sania A",
+        "firstName": "Sania A"
+      }
+    ],
+    "doi": "10.7759/cureus.23135",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Cureus",
+    "molCell": 0.0,
+    "pmid": 35444870,
+    "pubYear": 2022,
+    "title": "Assessing Tumor Size by MRI and Pathology in Type I Endometrial Carcinoma to Predict Lymph Node Metastasis.",
+    "acr": 2.3333333333333335,
+    "apt": 0.5,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 7,
+    "citedByPmids": [
+      38862693,
+      38482453,
+      39594136,
+      39346735,
+      38430704,
+      38473283,
+      36628225
+    ],
+    "citedByPmidsByYear": [
+      {
+        "38862693": 2024
+      },
+      {
+        "38482453": 2024
+      },
+      {
+        "39594136": 2024
+      },
+      {
+        "39346735": 2024
+      },
+      {
+        "38430704": 2024
+      },
+      {
+        "38473283": 2024
+      },
+      {
+        "36628225": 2022
+      }
+    ],
+    "citedPmids": [
+      25124624,
+      29516573,
+      16246402,
+      25952272,
+      29282600,
+      27999680,
+      22236905,
+      33713972,
+      30426278,
+      20953904,
+      29238915,
+      28498250,
+      26712866,
+      26645990,
+      24676344,
+      25969637,
+      21537049,
+      25549769,
+      24078661,
+      8752246,
+      29541859,
+      29988784
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 2.1148783589460836,
+    "fcr": 4.630334408719078,
+    "nihRcrPercentile": 53.9,
+    "rcr": 1.1032943447849708,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "35463308": {
+    "_id": "35463308",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Ravaggi",
+        "fullName": "Ravaggi, Antonella",
+        "firstName": "Antonella"
+      },
+      {
+        "lastName": "Gambino",
+        "fullName": "Gambino, Angela",
+        "firstName": "Angela"
+      },
+      {
+        "lastName": "Ferrari",
+        "fullName": "Ferrari, Federico",
+        "firstName": "Federico"
+      },
+      {
+        "lastName": "Olivari",
+        "fullName": "Olivari, Alessandro",
+        "firstName": "Alessandro"
+      },
+      {
+        "lastName": "Zanotti",
+        "fullName": "Zanotti, Laura",
+        "firstName": "Laura"
+      },
+      {
+        "lastName": "Romani",
+        "fullName": "Romani, Chiara",
+        "firstName": "Chiara"
+      },
+      {
+        "lastName": "Ardighieri",
+        "fullName": "Ardighieri, Laura",
+        "firstName": "Laura"
+      },
+      {
+        "lastName": "Antonelli",
+        "fullName": "Antonelli, Paolo",
+        "firstName": "Paolo"
+      },
+      {
+        "lastName": "Garganese",
+        "fullName": "Garganese, Giorgia",
+        "firstName": "Giorgia"
+      },
+      {
+        "lastName": "Gallo",
+        "fullName": "Gallo, Daniela",
+        "firstName": "Daniela"
+      },
+      {
+        "lastName": "Scambia",
+        "fullName": "Scambia, Giovanni",
+        "firstName": "Giovanni"
+      },
+      {
+        "lastName": "Bignotti",
+        "fullName": "Bignotti, Eliana",
+        "firstName": "Eliana"
+      },
+      {
+        "lastName": "Sartori",
+        "fullName": "Sartori, Enrico",
+        "firstName": "Enrico"
+      },
+      {
+        "lastName": "Calza",
+        "fullName": "Calza, Stefano",
+        "firstName": "Stefano"
+      },
+      {
+        "lastName": "Odicino",
+        "fullName": "Odicino, Franco",
+        "firstName": "Franco"
+      }
+    ],
+    "doi": "10.3389/fonc.2022.818613",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Front Oncol",
+    "molCell": 0.0,
+    "pmid": 35463308,
+    "pubYear": 2022,
+    "title": "VEGF-D Serum Level as a Potential Predictor of Lymph Node Metastasis and Prognosis in Vulvar Squamous Cell Carcinoma Patients.",
+    "acr": 1.3333333333333333,
+    "apt": 0.25,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 4,
+    "citedByPmids": [
+      39960569,
+      40529367,
+      40068770,
+      37809059
+    ],
+    "citedByPmidsByYear": [
+      {
+        "39960569": 2025
+      },
+      {
+        "40529367": 2025
+      },
+      {
+        "40068770": 2025
+      },
+      {
+        "37809059": 2023
+      }
+    ],
+    "citedPmids": [
+      33234921,
+      19029492,
+      33619601,
+      26241709,
+      33587289,
+      16424394,
+      8876195,
+      12684405,
+      28356187,
+      20226684,
+      22817635,
+      28751058,
+      25670042,
+      9435229,
+      28441255,
+      9160492,
+      22340592,
+      8617204,
+      15057311,
+      31897584,
+      18325074,
+      24148762,
+      10449752,
+      12576440,
+      20672317,
+      16963112,
+      24561443,
+      11912138,
+      21876509,
+      12610509,
+      34077608,
+      8314530,
+      28535405,
+      21970884,
+      25801241,
+      16466657,
+      31237047,
+      28040721,
+      15289610,
+      11175849,
+      9194626,
+      20010215,
+      33433946,
+      31378417,
+      30030346
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 2.772352013432889,
+    "fcr": 6.445779987752487,
+    "nihRcrPercentile": 26.1,
+    "rcr": 0.4809394069991572,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "38146775": {
+    "_id": "38146775",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Kido",
+        "fullName": "Kido, Aki",
+        "firstName": "Aki"
+      },
+      {
+        "lastName": "Himoto",
+        "fullName": "Himoto, Yuki",
+        "firstName": "Yuki"
+      },
+      {
+        "lastName": "Kurata",
+        "fullName": "Kurata, Yasuhisa",
+        "firstName": "Yasuhisa"
+      },
+      {
+        "lastName": "Minamiguchi",
+        "fullName": "Minamiguchi, Sachiko",
+        "firstName": "Sachiko"
+      },
+      {
+        "lastName": "Nakamoto",
+        "fullName": "Nakamoto, Yuji",
+        "firstName": "Yuji"
+      }
+    ],
+    "doi": "10.1002/jmri.29161",
+    "human": 1.0,
+    "iCiteArticle": false,
+    "isClinicalArticle": false,
+    "journalNameIso": "J Magn Reson Imaging",
+    "molCell": 0.0,
+    "pmid": 38146775,
+    "pubYear": 2024,
+    "title": "Preoperative Imaging Evaluation of Endometrial Cancer in FIGO 2023.",
+    "acr": 6.0,
+    "apt": 0.75,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 6,
+    "citedByPmids": [
+      38935549,
+      39402160,
+      39796713,
+      40586816,
+      39337892,
+      40520881
+    ],
+    "citedByPmidsByYear": [
+      {
+        "38935549": 2024
+      },
+      {
+        "39402160": 2024
+      },
+      {
+        "39796713": 2024
+      },
+      {
+        "40586816": 2025
+      },
+      {
+        "39337892": 2024
+      },
+      {
+        "40520881": 2025
+      }
+    ],
+    "citedPmids": [
+      3652025,
+      34874188,
+      35690222,
+      10644100,
+      31521902,
+      33082371,
+      32154773,
+      19900084,
+      11222190,
+      32337640,
+      34785076,
+      32074591,
+      26485119,
+      35894782,
+      30102441,
+      37548599,
+      35467253,
+      6606306,
+      33741266,
+      36018785,
+      32681608,
+      33793008,
+      34262088,
+      28975929,
+      29750540,
+      33420205,
+      35067539,
+      23431227,
+      34687853,
+      25928157,
+      26233681,
+      34233456,
+      33153558,
+      32824765,
+      29934920,
+      9168730,
+      32706384,
+      27103176,
+      31712961,
+      18581404,
+      18226629,
+      28517668,
+      22155678,
+      9809732,
+      33573078,
+      33825929,
+      22412131,
+      26295190,
+      35819326,
+      7933016,
+      32229081,
+      28493790,
+      26546334,
+      38424845,
+      33712263,
+      27631107,
+      36328942,
+      17126892,
+      32315482,
+      33852049,
+      36385486,
+      27178725,
+      33276249,
+      33192036,
+      34589556,
+      21898081,
+      26522396,
+      31341726,
+      31785782,
+      14501811,
+      24668009,
+      34773449,
+      29995239,
+      36528577,
+      17413976,
+      26185031,
+      33997160,
+      35231806,
+      30550484,
+      28668163,
+      28674966,
+      26634381,
+      21670955
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 2.1298135050536104,
+    "fcr": 3.347505179868636,
+    "nihRcrPercentile": null,
+    "rcr": 2.8171480675482763,
+    "rcrIsProvisional": true,
+    "xCoord": 0.0,
+    "yCoord": -0.75
+  },
+  "38448945": {
+    "_id": "38448945",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Leng",
+        "fullName": "Leng, Yinping",
+        "firstName": "Yinping"
+      },
+      {
+        "lastName": "Kan",
+        "fullName": "Kan, Ao",
+        "firstName": "Ao"
+      },
+      {
+        "lastName": "Wang",
+        "fullName": "Wang, Xiwen",
+        "firstName": "Xiwen"
+      },
+      {
+        "lastName": "Li",
+        "fullName": "Li, Xiaofen",
+        "firstName": "Xiaofen"
+      },
+      {
+        "lastName": "Xiao",
+        "fullName": "Xiao, Xuan",
+        "firstName": "Xuan"
+      },
+      {
+        "lastName": "Wang",
+        "fullName": "Wang, Yu",
+        "firstName": "Yu"
+      },
+      {
+        "lastName": "Liu",
+        "fullName": "Liu, Lan",
+        "firstName": "Lan"
+      },
+      {
+        "lastName": "Gong",
+        "fullName": "Gong, Lianggeng",
+        "firstName": "Lianggeng"
+      }
+    ],
+    "doi": "10.1186/s12885-024-12037-8",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "BMC Cancer",
+    "molCell": 0.0,
+    "pmid": 38448945,
+    "pubYear": 2024,
+    "title": "Contrast-enhanced CT radiomics for preoperative prediction of stage in epithelial ovarian cancer: a multicenter study.",
+    "acr": 2.0,
+    "apt": 0.5,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 2,
+    "citedByPmids": [
+      40075494,
+      40360958
+    ],
+    "citedByPmidsByYear": [
+      {
+        "40075494": 2025
+      },
+      {
+        "40360958": 2025
+      }
+    ],
+    "citedPmids": [
+      35391567,
+      29724422,
+      33168565,
+      18458244,
+      20839002,
+      20093590,
+      28289945,
+      36469315,
+      35687135,
+      34773830,
+      23257362,
+      32154773,
+      23169792,
+      32767522,
+      18195328,
+      12704041,
+      29737390,
+      23093486,
+      34086094,
+      18682935,
+      21502390,
+      20974358,
+      27042752,
+      26930463,
+      31385045,
+      34532289,
+      35037985,
+      17099194,
+      24219974,
+      36222864,
+      29402533,
+      33433946,
+      33278287
+    ],
+    "citingClinicalPmids": null,
+    "ecr": null,
+    "fcr": 12.725625395953756,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "38452144": {
+    "_id": "38452144",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Borges",
+        "fullName": "Borges, A C",
+        "firstName": "A C"
+      },
+      {
+        "lastName": "Veloso",
+        "fullName": "Veloso, H",
+        "firstName": "H"
+      },
+      {
+        "lastName": "Galindo",
+        "fullName": "Galindo, P",
+        "firstName": "P"
+      },
+      {
+        "lastName": "Danés",
+        "fullName": "Danés, A",
+        "firstName": "A"
+      },
+      {
+        "lastName": "Chacon",
+        "fullName": "Chacon, E",
+        "firstName": "E"
+      },
+      {
+        "lastName": "Mínguez",
+        "fullName": "Mínguez, J A",
+        "firstName": "J A"
+      },
+      {
+        "lastName": "Alcázar",
+        "fullName": "Alcázar, J L",
+        "firstName": "J L"
+      }
+    ],
+    "doi": "10.1002/uog.27633",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Ultrasound Obstet Gynecol",
+    "molCell": 0.0,
+    "pmid": 38452144,
+    "pubYear": 2024,
+    "title": "Role of ultrasound in detection of lymph-node metastasis in gynecological cancer: systematic review and meta-analysis.",
+    "acr": 1.0,
+    "apt": 0.5,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 1,
+    "citedByPmids": [
+      40187195
+    ],
+    "citedByPmidsByYear": [
+      {
+        "40187195": 2025
+      }
+    ],
+    "citedPmids": [
+      22632665,
+      27802186,
+      33538338,
+      12111919,
+      20298252,
+      30656645,
+      19705403,
+      10549957,
+      30952370,
+      35565394,
+      30630889,
+      36450266,
+      31359169,
+      35804853,
+      30811909,
+      33397713,
+      21349672,
+      36353907,
+      12958120,
+      25092154,
+      27587625,
+      31213057,
+      36791750,
+      37336757,
+      26823564,
+      12807243,
+      33782057,
+      31048403,
+      18457596,
+      37127326,
+      34077608,
+      21898632,
+      37369376,
+      34762728,
+      16085191,
+      20703971,
+      16411226,
+      14529663,
+      7664772,
+      31636004,
+      22007046,
+      7896183,
+      29538254,
+      18214033,
+      31165242,
+      37208571,
+      35831031,
+      27091633
+    ],
+    "citingClinicalPmids": null,
+    "ecr": null,
+    "fcr": 7.587026843300342,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "38872479": {
+    "_id": "38872479",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Liang",
+        "fullName": "Liang, Fengyi",
+        "firstName": "Fengyi"
+      },
+      {
+        "lastName": "Xin",
+        "fullName": "Xin, Weijuan",
+        "firstName": "Weijuan"
+      },
+      {
+        "lastName": "Yang",
+        "fullName": "Yang, Shaoliang",
+        "firstName": "Shaoliang"
+      },
+      {
+        "lastName": "Wang",
+        "fullName": "Wang, Haiyan",
+        "firstName": "Haiyan"
+      }
+    ],
+    "doi": "10.3802/jgo.2025.36.e1",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "J Gynecol Oncol",
+    "molCell": 0.0,
+    "pmid": 38872479,
+    "pubYear": 2025,
+    "title": "Nomogram for predicting pathology upstaging in patients with EIN: is sentinel lymph node assessment useful in these patients?",
+    "acr": 1.0,
+    "apt": 0.5,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 1,
+    "citedByPmids": [
+      40380169
+    ],
+    "citedByPmidsByYear": [
+      {
+        "40380169": 2025
+      }
+    ],
+    "citedPmids": [
+      25247588,
+      36357974,
+      28890426,
+      33831939,
+      33388311,
+      26463434,
+      27504940,
+      34638250,
+      26977831,
+      35001185,
+      29489475,
+      35793641,
+      29665453,
+      33785467,
+      34416706,
+      31401259,
+      25316176,
+      33403680
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 0.999999999335148,
+    "fcr": 4.013732177530004,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false,
+    "xCoord": 0.0,
+    "yCoord": 1.0
+  },
+  "39171058": {
+    "_id": "39171058",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Pati",
+        "fullName": "Pati, Saroj Kumar",
+        "firstName": "Saroj Kumar"
+      },
+      {
+        "lastName": "Mondal",
+        "fullName": "Mondal, Kingshuk",
+        "firstName": "Kingshuk"
+      },
+      {
+        "lastName": "Bodhey",
+        "fullName": "Bodhey, Narendra Kuber",
+        "firstName": "Narendra Kuber"
+      },
+      {
+        "lastName": "Bagde",
+        "fullName": "Bagde, Nilaj",
+        "firstName": "Nilaj"
+      },
+      {
+        "lastName": "Gupta",
+        "fullName": "Gupta, Rakesh K",
+        "firstName": "Rakesh K"
+      },
+      {
+        "lastName": "Shukla",
+        "fullName": "Shukla, Arvind",
+        "firstName": "Arvind"
+      }
+    ],
+    "doi": "10.7759/cureus.65058",
+    "human": 0.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Cureus",
+    "molCell": 1.0,
+    "pmid": 39171058,
+    "pubYear": 2024,
+    "title": "Role of Multiparametric MRI in the Preoperative Evaluation of Endometrial Carcinoma: A Cross-Sectional Study.",
+    "acr": 0.0,
+    "apt": 0.05,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 0,
+    "citedByPmids": null,
+    "citedByPmidsByYear": null,
+    "citedPmids": [
+      27146774,
+      16228215,
+      1523309,
+      15031434,
+      8421757,
+      30514387,
+      33825929,
+      26471910,
+      17729360,
+      19258956,
+      21896664,
+      22119292,
+      30451333,
+      36510887,
+      31533436,
+      25332442,
+      30306593,
+      21751283,
+      20810230,
+      37169427
+    ],
+    "citingClinicalPmids": null,
+    "ecr": null,
+    "fcr": null,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false,
+    "xCoord": -0.8660254037844386,
+    "yCoord": -0.5
+  },
+  "39448083": {
+    "_id": "39448083",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Pan",
+        "fullName": "Pan, Teresa L",
+        "firstName": "Teresa L"
+      },
+      {
+        "lastName": "Pareja",
+        "fullName": "Pareja, Rene",
+        "firstName": "Rene"
+      },
+      {
+        "lastName": "Chiva",
+        "fullName": "Chiva, Luis",
+        "firstName": "Luis"
+      },
+      {
+        "lastName": "Rodriguez",
+        "fullName": "Rodriguez, Juliana",
+        "firstName": "Juliana"
+      },
+      {
+        "lastName": "Munsell",
+        "fullName": "Munsell, Mark F",
+        "firstName": "Mark F"
+      },
+      {
+        "lastName": "Iniesta",
+        "fullName": "Iniesta, Maria D",
+        "firstName": "Maria D"
+      },
+      {
+        "lastName": "Manzour",
+        "fullName": "Manzour, Nabil",
+        "firstName": "Nabil"
+      },
+      {
+        "lastName": "Frumovitz",
+        "fullName": "Frumovitz, Michael",
+        "firstName": "Michael"
+      },
+      {
+        "lastName": "Ramirez",
+        "fullName": "Ramirez, Pedro T",
+        "firstName": "Pedro T"
+      }
+    ],
+    "doi": "10.1136/ijgc-2024-005986",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Int J Gynecol Cancer",
+    "molCell": 0.0,
+    "pmid": 39448083,
+    "pubYear": 2024,
+    "title": "Accuracy of pre-operative tumor size assessment compared to final pathology and frequency of adjuvant treatment in patients with FIGO 2018 stage IB2 cervical cancer.",
+    "acr": 2.0,
+    "apt": 0.5,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 2,
+    "citedByPmids": [
+      40282496,
+      40558298
+    ],
+    "citedByPmidsByYear": [
+      {
+        "40282496": 2025
+      },
+      {
+        "40558298": 2025
+      }
+    ],
+    "citedPmids": [
+      22592722,
+      30659131,
+      18929686,
+      33538338,
+      19780741,
+      30656645,
+      28870937,
+      30389105,
+      32467336,
+      2868172,
+      34012238,
+      32073955,
+      32636272,
+      10764420,
+      37127326,
+      10329031,
+      31078660,
+      33443541
+    ],
+    "citingClinicalPmids": null,
+    "ecr": null,
+    "fcr": 4.016188083629906,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false
+  },
+  "39477326": {
+    "_id": "39477326",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Lenz",
+        "fullName": "Lenz, Caroline",
+        "firstName": "Caroline"
+      },
+      {
+        "lastName": "Gesemann",
+        "fullName": "Gesemann, Lara",
+        "firstName": "Lara"
+      },
+      {
+        "lastName": "Al-Baldawi",
+        "fullName": "Al-Baldawi, Yussor",
+        "firstName": "Yussor"
+      },
+      {
+        "lastName": "Püsken",
+        "fullName": "Püsken, Michael",
+        "firstName": "Michael"
+      },
+      {
+        "lastName": "Wingels",
+        "fullName": "Wingels, Amelie",
+        "firstName": "Amelie"
+      },
+      {
+        "lastName": "Mallmann",
+        "fullName": "Mallmann, Peter",
+        "firstName": "Peter"
+      },
+      {
+        "lastName": "Amir-Karibian",
+        "fullName": "Amir-Karibian, Constanze",
+        "firstName": "Constanze"
+      },
+      {
+        "lastName": "Jeschke",
+        "fullName": "Jeschke, Janice K",
+        "firstName": "Janice K"
+      },
+      {
+        "lastName": "Adams",
+        "fullName": "Adams, Jana",
+        "firstName": "Jana"
+      },
+      {
+        "lastName": "Morgenstern",
+        "fullName": "Morgenstern, Bernd",
+        "firstName": "Bernd"
+      },
+      {
+        "lastName": "Thangarajah",
+        "fullName": "Thangarajah, Fabinshy",
+        "firstName": "Fabinshy"
+      }
+    ],
+    "doi": "10.21873/anticanres.17332",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Anticancer Res",
+    "molCell": 0.0,
+    "pmid": 39477326,
+    "pubYear": 2024,
+    "title": "Accuracy of Preoperative Magnet Resonance Imaging to Predict Pathologic T-Stage in Patients With Cervical Cancer.",
+    "acr": 0.0,
+    "apt": 0.05,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 0,
+    "citedByPmids": null,
+    "citedByPmidsByYear": null,
+    "citedPmids": [],
+    "citingClinicalPmids": null,
+    "ecr": null,
+    "fcr": null,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false
+  },
+  "40130299": {
+    "_id": "40130299",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Cibula",
+        "fullName": "Cibula, D",
+        "firstName": "D"
+      },
+      {
+        "lastName": "Köhler",
+        "fullName": "Köhler, C",
+        "firstName": "C"
+      },
+      {
+        "lastName": "Jarkovský",
+        "fullName": "Jarkovský, J",
+        "firstName": "J"
+      },
+      {
+        "lastName": "Kocián",
+        "fullName": "Kocián, R",
+        "firstName": "R"
+      },
+      {
+        "lastName": "Dundr",
+        "fullName": "Dundr, P",
+        "firstName": "P"
+      },
+      {
+        "lastName": "Klát",
+        "fullName": "Klát, J",
+        "firstName": "J"
+      },
+      {
+        "lastName": "Zapardiel",
+        "fullName": "Zapardiel, I",
+        "firstName": "I"
+      },
+      {
+        "lastName": "Landoni",
+        "fullName": "Landoni, F",
+        "firstName": "F"
+      },
+      {
+        "lastName": "Frühauf",
+        "fullName": "Frühauf, F",
+        "firstName": "F"
+      },
+      {
+        "lastName": "Fischbach",
+        "fullName": "Fischbach, R",
+        "firstName": "R"
+      },
+      {
+        "lastName": "Borčinová",
+        "fullName": "Borčinová, M",
+        "firstName": "M"
+      },
+      {
+        "lastName": "Fischerová",
+        "fullName": "Fischerová, D",
+        "firstName": "D"
+      }
+    ],
+    "doi": "10.1002/uog.29205",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Ultrasound Obstet Gynecol",
+    "molCell": 0.0,
+    "pmid": 40130299,
+    "pubYear": 2025,
+    "title": "Magnetic resonance imaging and ultrasound examination in preoperative pelvic staging of early-stage cervical cancer: post-hoc analysis of SENTIX study.",
+    "acr": 1.0,
+    "apt": 0.5,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 1,
+    "citedByPmids": [
+      40558298
+    ],
+    "citedByPmidsByYear": [
+      {
+        "40558298": 2025
+      }
+    ],
+    "citedPmids": [
+      32750501,
+      19780741,
+      30656645,
+      23022593,
+      31869245,
+      30207593,
+      35256414,
+      33290995,
+      16508866,
+      30758678,
+      37127326,
+      34762728,
+      21898632,
+      37081900,
+      33852049,
+      32365651,
+      28785898,
+      20236693,
+      32096793,
+      38398166,
+      28700433,
+      30640706,
+      28186616,
+      33318656,
+      17892456,
+      27165471,
+      32415584,
+      31213057,
+      31812369,
+      33915001,
+      36791750,
+      11136561
+    ],
+    "citingClinicalPmids": null,
+    "ecr": 0.999999999335148,
+    "fcr": 3.8954092546131545,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false
+  },
+  "40209492": {
+    "_id": "40209492",
+    "animal": 0.0,
+    "authors": [
+      {
+        "lastName": "Batog",
+        "fullName": "Batog, Wiktoria Irena",
+        "firstName": "Wiktoria Irena"
+      },
+      {
+        "lastName": "Norris",
+        "fullName": "Norris, Lucy",
+        "firstName": "Lucy"
+      },
+      {
+        "lastName": "O'Toole",
+        "fullName": "O'Toole, Sharon",
+        "firstName": "Sharon"
+      },
+      {
+        "lastName": "Maguire",
+        "fullName": "Maguire, Patrick",
+        "firstName": "Patrick"
+      },
+      {
+        "lastName": "O'Gorman",
+        "fullName": "O'Gorman, Catherine",
+        "firstName": "Catherine"
+      },
+      {
+        "lastName": "Kelly",
+        "fullName": "Kelly, Michael",
+        "firstName": "Michael"
+      },
+      {
+        "lastName": "Saadeh",
+        "fullName": "Saadeh, Feras Abu",
+        "firstName": "Feras Abu"
+      }
+    ],
+    "doi": "10.1016/j.ejogrb.2025.113959",
+    "human": 1.0,
+    "iCiteArticle": true,
+    "isClinicalArticle": false,
+    "journalNameIso": "Eur J Obstet Gynecol Reprod Biol",
+    "molCell": 0.0,
+    "pmid": 40209492,
+    "pubYear": 2025,
+    "title": "Identification of groin node metastasis in squamous cell vulval cancer using preoperative [<sup>18</sup>F] FDG-PET/CT. Can unnecessary lymphadenectomy be prevented?",
+    "acr": 0.0,
+    "apt": 0.05,
+    "citedByClinicalArticle": false,
+    "citedByPmidCount": 0,
+    "citedByPmids": null,
+    "citedByPmidsByYear": null,
+    "citedPmids": [
+      33234921,
+      34435227,
+      33033165,
+      33619601,
+      23932893,
+      23701080,
+      27550403,
+      24371671,
+      21855972,
+      32487684,
+      26498604,
+      24984533,
+      37369376,
+      10920128,
+      35804853,
+      30034276,
+      35454862,
+      12648697,
+      28930828,
+      20092880,
+      22262953,
+      28546331,
+      30683259,
+      12409110,
+      34272721,
+      38927973,
+      25477274
+    ],
+    "citingClinicalPmids": null,
+    "ecr": null,
+    "fcr": null,
+    "nihRcrPercentile": null,
+    "rcr": null,
+    "rcrIsProvisional": false
+  }
+}

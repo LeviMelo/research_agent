@@ -1,0 +1,93 @@
+{
+  "research_question": "What is the role of preoperative imaging in the management of endometrial cancer?",
+  "pico": {
+    "population": "Patients with endometrial cancer",
+    "intervention": "Preoperative imaging (ultrasound, MRI, CT, PET/CT, lymphoscintigraphy)",
+    "comparator": "None (or standard care)",
+    "outcomes": "Staging, lymph node involvement, tumor grade, prognosis, need for lymphadenectomy, treatment planning"
+  },
+  "scope": {
+    "include_terms": [
+      "endometrial cancer",
+      "uterine cancer",
+      "pelvic cancer",
+      "staging",
+      "imaging",
+      "ultrasound",
+      "MRI",
+      "CT",
+      "PET/CT",
+      "lymphoscintigraphy",
+      "preoperative"
+    ],
+    "exclude_terms": [
+      "ovarian cancer",
+      "cervical cancer",
+      "renal cancer",
+      "lung cancer"
+    ],
+    "mesh_must": [
+      "Endometrial Neoplasms",
+      "Imaging"
+    ]
+  },
+  "screening_rules": {
+    "include": [
+      "Studies evaluating preoperative imaging in endometrial cancer"
+    ],
+    "exclude": [
+      "Studies focusing solely on histopathological assessment",
+      "Studies unrelated to staging or treatment planning"
+    ]
+  },
+  "sentinel_selection_rules": {
+    "prefer": [
+      "Lymphoscintigraphy",
+      "PET/CT"
+    ],
+    "avoid": []
+  },
+  "heterogeneity": {
+    "is_heterogeneous": true,
+    "reasons": [
+      "Varied imaging modalities used",
+      "Different staging systems employed",
+      "Diverse outcomes reported"
+    ],
+    "suggested_subscopes": [
+      {
+        "name": "Imaging Modality Comparison",
+        "include_terms": [
+          "ultrasound",
+          "MRI",
+          "CT",
+          "PET/CT",
+          "lymphoscintigraphy"
+        ],
+        "exclude_terms": []
+      },
+      {
+        "name": "Staging System Comparison",
+        "include_terms": [
+          "FIGO staging",
+          "pT0-T4",
+          "N0-N3",
+          "M0-M1"
+        ],
+        "exclude_terms": []
+      }
+    ]
+  },
+  "example_in": [
+    "A prospective study evaluating the use of 3D ultrasound in preoperative assessment of pelvic and abdominal spread in patients with ovarian cancer.",
+    "A comparative study on the diagnostic value of 3D ultrasound and diffusion-weighted MRI for preoperatively assessing myometrial invasion in endometrial cancer."
+  ],
+  "example_borderline": [
+    "A retrospective analysis comparing lymphoscintigraphy and single photon emission computed tomography with computed tomography (SPECT/CT) for sentinel lymph node detection in endometrial cancer.",
+    "A study evaluating the prognostic value of preoperative dynamic contrast-enhanced magnetic resonance imaging in epithelial ovarian cancer."
+  ],
+  "example_out": [
+    "A study focusing solely on histopathological assessment of pelvic lymph nodes in patients with cervical cancer.",
+    "A clinical trial evaluating a new chemotherapy regimen for endometrial cancer."
+  ]
+}

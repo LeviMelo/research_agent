@@ -1,0 +1,3 @@
+cluster_id,seeds,total_title_only,depth_title_only,total_snippet,depth_snippet,jaccard_similarity
+8,12,894,13,1196,15,0.334610472541507
+4,8,826,12,848,11,0.38576158940397354

@@ -1,0 +1,1948 @@
+Project structure for '/c/Users/Galaxy/LEVI/projects/Python/research_agent':
+===============================================================================
+  docs/00_overview.md
+  docs/10_philosophy.md
+  docs/20_data_ingest.md
+  docs/30_embeddings.md
+  docs/40_clustering.md
+  docs/50_expansion.md
+  docs/60_agent_handbook.md
+  docs/70_tools.md
+  docs/80_guardrails_logging.md
+  docs/90_config.md
+  memo_update.md
+  project_old.md
+  project_proposal.md
+  technical_memo.md
+
+
+
+###############################################################################
+### FILE: docs/00_overview.md
+###############################################################################
+**Filename:** `docs/00_overview.md`
+
+---
+
+# Autonomous Literature-Discovery & Systematic-Review Agent
+
+*(Gemma 3 n LLM + Qwen 0.6 B embeddings — single-laptop deployment)*
+
+---
+
+## 1  Why This Project Exists
+
+Traditional systematic reviews (SRs) require weeks of manual database queries, duplicate screening, and PRISMA compliance checks. By fusing:
+
+* **Gemma 3 n** — a locally-running 7-B model that can read, reason, and plan,
+* **Qwen 0.6 B** — a GPU-friendly sentence-embedding model that turns every abstract into a 1024-d vector, and
+* **deterministic Python plumbing** — for downloading PubMed/Crossref records, building a citation graph, and clustering papers,
+
+we can create an *autonomous researcher* that:
+
+1. **Hunts for evidence gaps** (fields with trials but no up-to-date SR).
+2. **Pivots automatically** if it discovers a prior SR already covers the intended topic.
+3. **Completes a PRISMA-ready SR draft** when enough trials accumulate.
+4. **Runs entirely on commodity hardware** (i7-13700H + RTX 4050 6 GB, 32 GB RAM).
+
+---
+
+## 2  Laptop Hardware Envelope
+
+| Component | Spec                                         |
+| --------- | -------------------------------------------- |
+| CPU       | 14-core Intel i7-13700H                      |
+| RAM       | 32 GB DDR5                                   |
+| GPU       | NVIDIA RTX 4050 Laptop (6 GB VRAM)           |
+| Storage   | ≥ 1 TB NVMe (supports mmap of 20 GB vectors) |
+
+*Context window*: Gemma comfortably handles **≈ 10 000 tokens** at 20-30 tok/s on this GPU.
+
+---
+
+## 3  High-Level Control Loop
+
+```
+┌────────────────── Retrieval ────────────────┐
+│ 1. Gemma writes semantic PubMed query OR    │
+│    asks for citation ripple                 │
+│ 2. Deterministic code fetches papers,       │
+│    adds embeddings, updates graph           │
+└──────────────────────────────────────────────┘
+┌────────────────── Organisation ─────────────┐
+│ 3. HDBSCAN clusters embeddings              │
+│ 4. Gemma labels / merges / splits clusters  │
+└──────────────────────────────────────────────┘
+┌────────────────── Processing ───────────────┐
+│ 5. Gemma chooses tools: run_pico,           │
+│    find_existing_sr, ensure_completeness…   │
+│ 6. Deterministic executors run heavy calls  │
+└──────────────────────────────────────────────┘
+┌────────────────── Decision ────────────────┐
+│ 7. Gemma mutates goal_state.json:          │
+│      • continue   • pivot   • stop         │
+└─────────────────────────────────────────────┘
+(repeat until stop condition)
+
+All parameters (cosine thresholds, batch sizes) live in **config.toml**; no constants are hard-coded.
+```
+
+---
+
+## 4  Key Architectural Commitments
+
+* **Cognition vs Plumbing** – Gemma never touches raw SQL or APIs; it only reads language and issues tool calls.
+* **Frozen Centroids** – Once Gemma approves a cluster, its semantic centre and ID stay fixed; new papers join by cosine proximity.
+* **Adaptive Expansion** – Downstream growth uses a decreasing cosine threshold with Gemma boundary checks; upstream uses reference-frequency + Gemma filter.
+* **Self-Mutating Goals** – `goal_state.json` lets Gemma pivot from “conduct\_SR” to “seek\_gap” without human prompts.
+* **Sequential Interleaving** – Multiple goals run in alternating cycles—no multithreading, no model contention.
+
+---
+
+## 5  Module Map (detailed in later memos)
+
+| ID | Module         | Core Idea                             |
+| -- | -------------- | ------------------------------------- |
+| A  | Data Ingest    | PubMed + Crossref merge into SQLite   |
+| B  | Expansion      | Semantic boundary + adaptive ripple   |
+| C  | Organisation   | HDBSCAN → frozen centroids + metrics  |
+| D  | Tool Registry  | Heavy operations Gemma can call       |
+| E  | Goal Engine    | Mutable goal\_state + handbook prompt |
+| F  | Logging/Guards | JSON retry, STOP flag, RAM watchdog   |
+
+---
+
+## 6  Success Criteria
+
+* **Gap Scouting** – agent outputs Markdown dossier for one cluster with ≥ 6 eligible RCTs and *no* compliant prior SR.
+* **Full SR** – agent produces PRISMA-check-passed draft (PICO table + abstract synthesis).
+* **Runtime** – stays within 6 GB VRAM and 28 GB RAM; single cycle ≤ 20 minutes on laptop.
+
+---
+
+*This overview links to all deeper memos (`10_philosophy.md`, `20_data_ingest.md`, …) which specify algorithms, thresholds, and file layouts.*
+
+
+
+###############################################################################
+### FILE: docs/10_philosophy.md
+###############################################################################
+**Filename:** `docs/10_philosophy.md`
+*(This memo captures every guiding principle, assumption, and non-negotiable rule that shapes all other modules. Nothing here should need to change unless we switch hardware or core LLMs.)*
+
+---
+
+# 10 – Architectural Philosophy & First Principles
+
+> “Plumbing shouldn’t think and AI shouldn’t fetch URLs.”
+
+Everything in this project follows that mantra.
+Below we spell out the doctrines that inform design choices, thresholds, and coding style.
+When a future change feels reasonable, measure it against these principles first.
+
+---
+
+## 1  Division of Labour
+
+| Layer                                        | Responsibilities                                                                                                                                                                                            | Never Does                               |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **Deterministic code** (“muscle & skeleton”) | • Download records from PubMed / Crossref<br>• Insert & dedup SQL rows<br>• Generate embeddings with Qwen<br>• Cluster with HDBSCAN<br>• Apply cosine maths, RAM checks, OOM fallbacks                      | Write English, decide clinical relevance |
+| **Gemma 3 n** (“autonomous researcher”)      | • Read titles/abstracts and extracted fields<br>• Label, merge, split clusters<br>• Decide which heavy tool to run next<br>• Judge SR overlap, PRISMA compliance<br>• Mutate `goal_state.json` (pivot/stop) | Call HTTP APIs directly, handle SQL      |
+| **Qwen 0.6 B** (“sensory cortex”)            | • Produce 1024-d vectors for any text, inc. instruction queries and PICO fields                                                                                                                             | Decide anything; it’s dumb math          |
+
+---
+
+## 2  Handbook-Driven Autonomy
+
+*Every run is controlled by a Markdown (or Yaml) handbook.*
+Sections:
+
+```
+Primary_goal: seek_gap | conduct_SR | ...
+Seed_query:  "ketogenic diet AND epilepsy"
+Success:      eligible_trials≥6 AND PRISMA_compliant==false
+Tools_allowed: search_pubmed, run_pico, ...
+Exploration:   true | false
+```
+
+* Why? Reproducibility and audit—changing behaviour never requires code edit, only handbook diff.
+* Gemma sees the handbook at the top of every cycle; executor validates that a chosen tool is permitted.
+
+---
+
+## 3  Self-Mutating Goal Object
+
+```json
+goal_state.json
+{
+  "primary_goal": "seek_gap",
+  "topic": "ketogenic diet epilepsy adults",
+  "status": "in_progress",
+  "cluster_id": null,
+  "subgoals": []
+}
+```
+
+* Gemma can rewrite anything except history.
+* Example pivot: `"primary_goal":"seek_gap" → "conduct_SR"` once enough RCTs exist.
+* Executor simply serialises the mutation; no logic second-guesses Gemma.
+
+---
+
+## 4  Clustering Doctrine – “Stable Buckets, Fluid Members”
+
+1. First HDBSCAN pass yields provisional clusters.
+2. **Gemma validates** each cluster:
+
+   * writes a 10-word label + 50-word summary,
+   * decides to keep / merge / split.
+3. Accepted cluster gets:
+
+   * **Frozen centroid** vector (mean of `[I|C|O|StudyDesign]` embeddings).
+   * **Immutable ID** = `sha1(label + timestamp)[:12]`.
+4. On later expansions:
+
+   * New paper joins closest centroid **if** cosine ≤ `τ_assign`;
+     `τ_assign = 95th percentile` of existing members’ distances.
+   * Papers outside all centroids remain `unassigned` until next Gemma cycle.
+5. Splits occur *only* when Gemma calls `split_cluster`; executor reruns HDBSCAN on that cluster only.
+6. Merges occur analogously.
+
+*Result:* textual names stay meaningful; graphs may grow without invalidating Gemma’s mental map.
+
+---
+
+## 5  Expansion Philosophy
+
+### 5.1 Downstream (children) – “Semantic + Human Gate”
+
+* Start with cosine threshold `τ0 = 0.60`.
+* Batch boundary of 40 abstracts around τ; Gemma votes keep/discard.
+* If Gemma keeps any → accept them, decrease threshold by δ = 0.05, loop.
+* Stop when Gemma keeps zero or free RAM within 2 GB of limit.
+
+### 5.2 Upstream (parents) – “Enough but Not Too Many”
+
+* Count how often each parent DOI/PMID is cited inside the cluster.
+* Select parents until cumulative citation share ≥ **α = 0.25**, but no more than **30**.
+* Gemma reviews and may reject irrelevant reviews; if >80 % rejected halve α and retry once.
+
+Downstream then ripples one hop from accepted seeds; Gemma can ask to switch expansion mode per cycle.
+
+---
+
+## 6  Embedding & Token Policies
+
+* Qwen vectors are **FP16** mmapped; 10 M papers ≈ 20 GB.
+* Token soft-cap per Gemma prompt **9 500 tokens**.
+  Sampling algorithm drops oldest abstracts until cap met.
+* Average 80 tokens/abstract → Gemma usually sees 60–110 abstracts per cluster.
+
+---
+
+## 7  Logging & Guard-Rails
+
+* Full prompts **including chain-of-thought** saved as Markdown in `logs/`.
+* Logs older than 30 days gzipped.
+* JSON parsing error ⇒ send “FIX JSON ONLY”; retry once, then skip.
+* OOM on embedding ⇒ halve batch size; if still fails, log & skip batch.
+* `STOP` file in project root halts after current cycle (used for manual audit).
+
+---
+
+## 8  Why Sequential Cycle Interleaving, not Multithread
+
+* Single GPU avoids vLLM contention.
+* Each cycle ≤ 20 min; interleaving two goals gives human-perceived concurrency.
+* Cluster IDs include goal hash to prevent collisions.
+* Upgrade path: run separate processes when dual-GPU hardware available.
+
+---
+
+## 9  Non-Negotiables
+
+* All heavy calls (**search\_pubmed**, **run\_pico**, etc.) *must* flow through tool registry.
+* No Gemma self-reflection disable; keep COT for audit.
+* Abstracts-only ingestion unless explicit legal clearance for PDFs.
+* Every parameter lives in `config.toml`; *no magic numbers* in code.
+
+---
+
+### This memo defines the “constitution.”
+
+Every other documentation file (data ingest, expansion, config) must align with these first principles.
+
+
+
+###############################################################################
+### FILE: docs/20_data_ingest.md
+###############################################################################
+**Filename:** `docs/20_data_ingest.md`
+
+---
+
+# 20 – Data Ingest, Normalisation & Storage
+
+*(building a reproducible PubMed + Crossref corpus on local disk)*
+
+---
+
+## 1  High-Level Flow
+
+```
+PubMed E-utilities       Crossref REST
+        │                       │
+        ▼                       ▼
+   fetch_medline()        fetch_crossref()
+        │                       │
+        ├─→ parse_article() ─┐   │
+        │                   │   │
+        └─→ insert_sqlite() │   │
+                            └───┴──► dedup_merge_refs()
+                                            │
+                                            ▼
+                                 mmap embeddings folder
+```
+
+Everything runs from a single CLI command:
+
+```bash
+python -m ingest --since 2023-01-01 --retmax 100000
+```
+
+---
+
+## 2  SQLite Schema v1
+
+### 2.1 `paper` table
+
+| column           | type    | note                                     |
+| ---------------- | ------- | ---------------------------------------- |
+| pmid PRIMARY KEY | INTEGER | NCBI PubMed ID (if absent, use DOI hash) |
+| doi              | TEXT    | normalised, lowercase                    |
+| title            | TEXT    | UTF-8                                    |
+| abstract         | TEXT    | UTF-8                                    |
+| journal          | TEXT    | NLM journal title abbreviation           |
+| year             | INT     | publication year                         |
+| article\_type    | TEXT    | “Randomized Controlled Trial”, “Review”… |
+| created\_ts      | INT     | Unix epoch seconds (first seen)          |
+
+### 2.2 `ref` table
+
+| column               | type    | meaning                                      |
+| -------------------- | ------- | -------------------------------------------- |
+| src                  | INTEGER | citing PMID                                  |
+| dst                  | INTEGER | cited PMID (if DOI-only, map to PMID or 0)   |
+| prov                 | INT     | bitmask 1 = PubMed ‘cites’, 2 = Crossref ref |
+| PRIMARY KEY(src,dst) |         | ensures dedup                                |
+
+---
+
+## 3  PubMed Fetcher
+
+```python
+def fetch_medline(pmids: list[int]) -> list[ET.Element]:
+    url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+    params = {"db":"pubmed","id":','.join(map(str,pmids)),
+              "retmode":"xml","rettype":"abstract"}
+    xml = requests.get(url, params=params, timeout=20).text
+    return parse_etree(xml)
+```
+
+* **Batch size** 200 IDs
+* **Retry** 3 attempts with 2× back-off
+* **Rate** ≤ 3 QPS default (configurable)
+
+`parse_article()` extracts title, abstract, article type, DOI, refs (via `<ReferenceList>`).
+
+---
+
+## 4  Crossref Reference Harvester
+
+```python
+def fetch_crossref(doi: str) -> list[str]:
+    url = f"https://api.crossref.org/works/{doi}"
+    j = requests.get(url, timeout=20).json()
+    return [ref["DOI"].lower()
+            for ref in j["message"].get("reference", [])
+            if "DOI" in ref]
+```
+
+* Called **lazily** the first time Gemma asks for upstream parents of a paper lacking reference data.
+* Cached to `cache/crossref_json/{sha1(doi)}.json`.
+
+Mapping DOI→PMID uses NCBI `elink` (`dbfrom=pubmed&linkname=pubmed_pubmed_doi`); unmapped DOIs stored with `dst=0`.
+
+---
+
+## 5  Dedup & Merge Logic
+
+```sql
+-- insert paper row
+INSERT OR IGNORE INTO paper VALUES (...)
+
+-- insert each ref edge
+INSERT OR IGNORE INTO ref(src,dst,prov) VALUES (?,?,?)
+```
+
+* If an edge already exists with different provenance, `prov = prov|new`.
+* Chronology inconsistencies (src.year < dst.year) are kept; clustering algorithm does not depend on DAG.
+
+---
+
+## 6  Embedding Pipeline Trigger
+
+After every **N = 10 000** new `paper` rows:
+
+1. Query uncached PMIDs → list\[abstract]
+2. Run Qwen encoder on GPU in chunks of 50 k texts
+3. Append vectors to `emb/E.npy` using `numpy.memmap`
+4. Store row-offset mapping in `emb/offsets.npy` (`pmid → index`)
+
+Extraction vectors (`p.npy` … `m.npy`) appear only **after** Gemma’s first `run_pico` batch.
+
+---
+
+## 7  Baseline Snapshot & Offline Mode
+
+* Weekly cron job downloads NIH **PubMed Baseline** (≈ 210 XML gzip files).
+* A small script `baseline_to_sqlite.py` pre-populates `paper` and `ref` tables—used if live APIs fail 5× consecutively.
+
+Runtime switch:
+
+```python
+if api_error_count > 5:
+    use_baseline = True
+```
+
+---
+
+## 8  Configuration Options (`config.toml` Extract)
+
+```toml
+[ingest]
+pubmed_batch        = 200
+max_qps             = 3
+crossref_timeout_s  = 20
+insert_commit_every = 2000
+
+[embedding]
+chunk_size          = 50000
+refresh_threshold   = 10000     # new papers before re-embed
+```
+
+---
+
+## 9  Tests
+
+| test                           | pass criteria                                |
+| ------------------------------ | -------------------------------------------- |
+| `test_fetch_medline_roundtrip` | 95% abstracts non-empty for 500 PMIDs        |
+| `test_doi_mapping`             | ≥ 85 % of incoming Crossref DOIs map to PMID |
+| `test_ref_dedup`               | duplicate insert does not increase rowcount  |
+| `test_embed_append`            | file size grows by 1024 × len(batch) × 2 B   |
+
+---
+
+### The ingest layer now feeds consistent `paper` and `ref` tables and a growing `E.npy`.
+
+All later modules (clustering, expansion, Gemma processing) depend only on these artefacts.
+
+
+
+###############################################################################
+### FILE: docs/30_embeddings.md
+###############################################################################
+**Filename:** `docs/30_embeddings.md`
+
+---
+
+# 30 – Embedding Layer: Generation, Storage, and Consumption
+
+This memo defines how every text fragment in the project becomes a fixed-length numeric vector, and how those vectors are stored, retrieved, and sampled for Gemma prompts and cosine maths.
+
+---
+
+## 1  Overview of Vector Families
+
+| Vector file | Generator (model → prompt)           | Dim  | Description                               |
+| ----------- | ------------------------------------ | ---- | ----------------------------------------- |
+| **E.npy**   | Qwen-0.6 B → `"Title · Abstract"`    | 1024 | Baseline semantic content for every paper |
+| **p.npy**   | Qwen-0.6 B →  `P` field (Population) | 1024 | After first `run_pico` extraction         |
+| **i.npy**   | Qwen-0.6 B →  `I` field (Interv.)    | 1024 | —                                         |
+| **c.npy**   | Qwen-0.6 B →  `C` field (Compar.)    | 1024 | —                                         |
+| **o.npy**   | Qwen-0.6 B →  `O` field (Outcome)    | 1024 | —                                         |
+| **m.npy**   | Qwen-0.6 B →  `StudyDesign` string   | 1024 | Captures RCT vs cohort etc.               |
+
+* All `.npy` files are **FP16 row-major memory-mapped** so 10 M × 1024 ≈ 20 GB fits on NVMe; RAM usage is streaming only.
+
+---
+
+## 2  Embedding Generation Pipeline
+
+```python
+def embed_batch(texts: list[str]):
+    """Return fp16 numpy array shape (N,1024)."""
+    tokens = tokenizer(texts, padding=True, truncation=True, max_length=256)
+    with torch.inference_mode():
+        reps = qwen_model(**tokens).last_hidden_state[:,0]  # CLS
+    return reps.half().cpu().numpy()
+```
+
+* **Chunk size** 50 k texts → ≈ 400 MB VRAM peak.
+* CLS token suffices; empirical AUC vs mean-pool negligible.
+* On RTX 4050 speed ≈ 1 M abstracts / 9 min.
+
+---
+
+## 3  Mapping PMIDs to Row Offsets
+
+`emb/offsets.npy` — 1 × N int64 array sorted by PMID.
+
+```python
+def vec(pmid, family="E"):
+    idx = offsets_binarysearch(pmid)
+    mmap = emm[family]   # np.memmap
+    return mmap[idx]
+```
+
+Binary search is `O(log N)` but L2 cache hit ≈ 50 ns, negligible.
+
+---
+
+## 4  Token-Aware Sampling for Gemma Prompts
+
+Gemma context soft-cap = **9 500 tokens**.
+Average tokens per abstract initially measured as 80 ± 25.
+Algorithm per cluster:
+
+```python
+def sample_for_gemma(pmid_list):
+    abstracts = sorted_by_year_recent(pmid_list)
+    toks = 0; sample=[]
+    for pmid in abstracts:
+        n = count_tokens(title+abstract)
+        if toks+n > 9500: break
+        toks += n; sample.append(pmid)
+    return sample            # 60–110 abstracts typical
+```
+
+Tokenizer: `tiktoken.get_encoding("cl100k_base")` for speed.
+
+---
+
+## 5  Adaptive Thresholds Derived from Vectors
+
+### 5.1  τ\_assign for new-member admission
+
+```
+distances = 1 - cosine(E_cluster, centroid_E)
+τ_assign  = np.percentile(distances, 95)
+```
+
+Stored alongside cluster manifest; recomputed only when Gemma approves split/merge.
+
+### 5.2  Downstream expansion starting τ0
+
+Fixed 0.60, then step δ=0.05 each boundary loop.
+
+---
+
+## 6  File Versioning & Migration
+
+* Weekly snapshot folder copies `.npy` and `offsets.npy` into `artifacts/YYYYMMDD/`.
+* Numpy version pinned (`1.26.x`) to ensure memmap header compatibility.
+* If extraction schema grows (e.g., add “Dose”), create `d.npy`; earlier snapshots remain readable.
+
+---
+
+## 7  Tests
+
+```python
+def test_vector_norms():
+    assert np.allclose(np.linalg.norm(E[:100],axis=1), 1, atol=1e-3)
+
+def test_offset_lookup():
+    pm = 34671022
+    idx = offsets_binarysearch(pm)
+    assert papers_db[pm].title.split()[0] in str(E[idx])
+```
+
+---
+
+## 8  Performance Benchmarks (laptop)
+
+| Task                  | Size      | Time      |
+| --------------------- | --------- | --------- |
+| Embed 100 k abstracts | 100 k     | 55 s      |
+| Cosine top-500 search | 100 k ×1k | 0.8 s GPU |
+| Token count 100 k abs | 100 k     | 1.1 s CPU |
+
+These numbers verify the pipeline stays within the design envelope.
+
+---
+
+The embedding layer is now fully specified; next memo `40_clustering.md` builds on these vector files.
+
+
+
+###############################################################################
+### FILE: docs/40_clustering.md
+###############################################################################
+**Filename:** `docs/40_clustering.md`
+
+---
+
+# 40 – Clustering, Cluster Lifecycle & Stability Rules
+
+This memo defines how papers are grouped into “topic kernels”, how those kernels stay stable across expansions, and how Gemma is empowered—but constrained—to restructure them.
+
+---
+
+## 1  Why Clustering Exists
+
+* Give Gemma a **coarse map** so it reasons about hundreds of groups, not millions of papers.
+* Supply metrics (size, citation growth, heterogeneity) that drive high-level decisions.
+* Act as containers for PICO extraction, PRISMA checks, and eventual SR drafts.
+
+---
+
+## 2  Initial Cluster Formation
+
+### 2.1  Feature Matrix
+
+* Each paper → concatenated vector `[I ‖ C ‖ O ‖ StudyDesign]`.
+* Dim = 1024 × 4 + 1024 = 5 120 floats (20 480 B fp16).
+
+### 2.2  HDBSCAN Parameters
+
+| Parameter                  | Value  | Reason                 |
+| -------------------------- | ------ | ---------------------- |
+| `min_samples`              | 8      | Reject singleton noise |
+| `min_cluster_size`         | 30     | Avoid micro-clusters   |
+| `metric`                   | cosine | normalised vectors     |
+| `cluster_selection_method` | 'eom'  | stable flat hierarchy  |
+
+*Distance matrix computed in 128 K batch stripes to stay below 4 GB RAM.*
+
+Result: list of clusters `C₀ … Cₙ`, plus label `-1` for noise.
+
+---
+
+## 3  Cluster Acceptance & Freezing
+
+1. Output table sorted by descending size.
+2. **Gemma “Cluster Audit #1”** prompt contains for each cluster:
+
+   * sample abstracts (token-aware, §30\_embeddings),
+   * size, mean year, citation velocity growth rate (CVGR), evidence refresh score (ERS), heterogeneity numeric, etc.
+3. Gemma responds JSON:
+
+```json
+[
+ {"idx":0,"action":"keep","label":"KD vs AED paediatric"},
+ {"idx":1,"action":"merge_into", "target_idx":0},
+ {"idx":2,"action":"discard"}
+]
+```
+
+4. Executor applies instructions.  For each **keep**:
+
+```
+centroid_E = mean(E_vectors)
+centroid_PICO = mean(I‖C‖O‖M)
+cluster_id = sha1(label + unix_ts)[:12]
+```
+
+Stored in table `cluster_manifest`:
+
+| field             | type      | note                                         |
+| ----------------- | --------- | -------------------------------------------- |
+| `cluster_id`      | TEXT PK   | frozen                                       |
+| `label`           | TEXT      | 10-word Gemma string                         |
+| `summary`         | TEXT      | 50-word Gemma string                         |
+| `frozen_centroid` | BLOB fp16 | 5 120-dim                                    |
+| `tau_assign`      | REAL      | initially 95th percentile of inner distances |
+| `parent_id`       | TEXT      | for split lineage                            |
+| `created_ts`      | INT       | unix epoch                                   |
+
+---
+
+## 4  Incremental Membership Assignment
+
+For every **new paper** added during expansions:
+
+```python
+dist = 1 - cosine(new_vec, frozen_centroid)
+if dist <= tau_assign:   assign_to_cluster(cluster_id)
+else:                    unassigned_pool.add(pmid)
+```
+
+Cost: O(#frozen\_clusters) ≈ few hundred per paper.
+
+---
+
+## 5  Dispersion Monitoring & Split Logic
+
+### 5.1  Dispersion Metric
+
+```
+dispersion = 1 - mean_cosine(member_vecs , frozen_centroid)
+```
+
+### 5.2  Trigger
+
+*If `dispersion ≥ 0.70` and cluster size ≥ 2× min\_cluster\_size (60), executor tags cluster “unstable”.*
+Next Gemma cycle receives list of unstable clusters plus sample abstracts across the spread.
+
+### 5.3  Gemma Split Command
+
+```json
+{"cluster_id":"67e9c14b62d3","action":"split_cluster"}
+```
+
+Executor re-runs HDBSCAN **inside that cluster’s members** with `min_cluster_size=20`.
+Children inherit `parent_id`, get new SHA-IDs and frozen centroids.
+
+---
+
+## 6  Merge Logic
+
+If Gemma decides two clusters semantically overlap:
+
+```json
+{"action":"merge_clusters",
+ "source":"fa12cd88991e",
+ "target":"67e9c14b62d3"}
+```
+
+Executor:
+
+1. Concatenates member lists → new centroid = mean of union.
+2. Recomputes `tau_assign` as P95 of new distances.
+3. Updates size, metrics; marks `source` as `merged_into`.
+
+---
+
+## 7  Per-Cluster Metrics (stored each cycle)
+
+| Metric           | Formula                                              |
+| ---------------- | ---------------------------------------------------- |
+| **Size**         | count(papers)                                        |
+| **CVGR**         | slope of citations/time (least-squares last 3 years) |
+| **ERS**          | (# papers published last 18 mo) / size               |
+| **het\_numeric** | mean cosine variety of P, I, C, O                    |
+| **dispersion**   | as above                                             |
+| **sr\_overlap**  | output of `find_existing_sr` (0-1)                   |
+
+These numbers feed Gemma’s triage prompt.
+
+---
+
+## 8  Special Cases
+
+* **Noise cluster (-1)** – ignored unless Gemma explicitly queries “show\_noise”.
+* **Very small cluster (< 30)** – Gemma can call `drop_cluster`; papers then remain unassigned until some other cluster accepts them.
+
+---
+
+## 9  Tests
+
+```python
+def test_split_reduces_dispersion():
+    old_disp = manifest["dispersion"]
+    split_cluster(cid)
+    new_disp = max(manifest_child["dispersion"] for child in children)
+    assert new_disp < old_disp * 0.8
+```
+
+---
+
+The clustering subsystem is now fully specified: deterministic rule set, Gemma interaction surface, storage, and monitoring.  Next memo `50_expansion.md` describes how new papers arrive for these clusters.
+
+
+
+###############################################################################
+### FILE: docs/50_expansion.md
+###############################################################################
+**Filename:** `docs/50_expansion.md`
+
+---
+
+# 50 – Expansion Engine: Bringing New Papers Into a Cluster
+
+Expansion is the agent’s “eyes and legs.”
+It has two distinct modes, each tuned for a different question:
+
+| Mode                                                             | When Gemma Chooses It                                                          | Core Idea                                                                                         |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| **Semantic Boundary Loop** (`expand_mode:"semantic"`)            | Gemma needs more *directly on-topic* primary studies to finish or judge an SR. | March outward in cosine space, ask Gemma to validate the frontier.                                |
+| **Adaptive Upstream/Downstream Ripple** (`expand_mode:"ripple"`) | Gemma wants historical roots or follow-up syntheses.                           | Pull in frequent parents (upstream) and then chase children (downstream), all with Gemma filters. |
+
+The executor implements both algorithms; Gemma selects the mode per cycle via tool arguments.
+
+---
+
+## 1  Common Preliminaries
+
+```json
+Action: {
+  "tool": "search_pubmed",
+  "args": {
+     "query": "adult refractory epilepsy ketone ester",
+     "expand_mode": "semantic" | "ripple"
+  }
+}
+```
+
+Executor fetches up to **2 000** candidate abstracts (`retmax` configurable) and embeds them with Qwen.
+
+All accepted PMIDs go through the clustering intake pipe defined in memo 40.
+
+---
+
+## 2  Semantic Boundary Loop (Mode "semantic")
+
+### 2.1  Parameters (config defaults)
+
+```
+tau_start     = 0.60   # initial cosine threshold
+delta_tau     = 0.05   # step down per loop
+batch_size    = 40     # titles+abstracts for Gemma
+no_keep_limit = 0      # stop when Gemma keeps zero in a batch
+```
+
+### 2.2  Algorithm
+
+```
+accepted = []
+threshold = tau_start
+while True:
+    pool = {cand | cos(Q_vec, E_cand) >= threshold} - accepted
+    if not pool: break
+    boundary = random_sample(pool, batch_size)
+    Gemma boundary_prompt(boundary) -> keep_ids
+    accepted += keep_ids
+    if len(keep_ids) == no_keep_limit:
+        break
+    threshold -= delta_tau
+```
+
+* `Q_vec` = **centroid of the current cluster** (not the query text).
+* Each loop shrinks the semantic circle; Gemma vetoes noise.
+* When `threshold` drops below 0.30 or RAM guard trips, loop stops.
+
+### 2.3  Why This Works
+
+* High precision at start; recall improves gradually.
+* Gemma boundary check keeps quality without inspecting thousands of abstracts.
+
+---
+
+## 3  Adaptive Upstream/Downstream Ripple (Mode "ripple")
+
+### 3.1  Upstream Parent Selection
+
+1. For cluster size `N`, count parent citations:
+
+```
+count(p) = |{child ∈ cluster : ref(child, p)}|
+f(p)      = count(p)/N
+```
+
+2. Sort parents by `f(p)` descending.
+3. Accept parents until **coverage Σ f(p) ≥ α** (`α = 0.25`) or **M = 30** parents collected.
+4. Show titles to Gemma; if Gemma rejects ≥ 80 % → halve α and retry once.
+
+Parents that survive are added to DB and set `seed_set`.
+
+### 3.2  Downstream Evidence Chase
+
+```
+current = seed_set
+while RAM_ok:
+    children = {citer(p) for p in current} - known_papers
+    E_child, cos = embed & cosine to cluster centroid
+    keep = {child | cos >= tau_sem}          # tau_sem 0.45
+    Gemma boundary_prompt(sample(keep,40)) -> keep_ids
+    accepted += keep_ids
+    current = keep_ids
+    if len(keep_ids)==0: break
+```
+
+* No fan-out caps; Gemma decides when semantic drift begins.
+* Loop ends when Gemma passes no IDs or RAM guard reached.
+
+---
+
+## 4  Integration with Goal Logic
+
+* After expansion, executor **writes count of new accepted papers** to `cluster_manifest`; Gemma sees the delta next cycle.
+* If new size ≥ `min_eligible_trials` (6 by default), Gemma may trigger `run_pico` or `prisma_check`.
+* If Gemma sees `sr_overlap > 0.6` she can call `propose_alternative_pico` and pivot.
+
+---
+
+## 5  RAM Guard Details
+
+* Guard threshold = `psutil.virtual_memory().available < 2*1024*1024*1024` (2 GB).
+* When triggered inside either algorithm, executor stops adding further PMIDs and logs `"expansion_halt: RAM guard"`.
+
+---
+
+## 6  Tests
+
+* **test\_semantic\_boundary\_shrinks** — ensure `threshold` monotonically decreases until stop.
+* **test\_parent\_coverage** — after upstream selection `Σ f(p)` ≥ 0.25 or parent count == 30.
+* **test\_ram\_guard** — simulate small RAM, loop exits early.
+
+---
+
+## 7  Tunable Scalars (duplicated in `90_config.md`)
+
+```
+alpha_upstream        = 0.25
+max_parents           = 30
+tau_start             = 0.60
+delta_tau             = 0.05
+tau_sem               = 0.45
+boundary_batch_size   = 40
+```
+
+---
+
+The expansion engine now fulfils both precision queries and exploratory ripples while handing the final relevance decision to Gemma.  Next memo `60_agent_handbook.md` describes how Gemma is instructed to invoke these expansion modes and other tools.
+
+
+
+###############################################################################
+### FILE: docs/60_agent_handbook.md
+###############################################################################
+**Filename:** `docs/60_agent_handbook.md`
+
+---
+
+# 60 – Handbook Design, Goal-State JSON & Cycle Scheduler
+
+The *handbook* is the contract between the human operator, Gemma, and the deterministic executor.
+It tells Gemma **what job to do**, **what tools are legal**, and **what “done” looks like**—nothing more.
+You can create a new handbook in plain Markdown (or YAML front-matter) to launch a fresh autonomous run without touching code.
+
+---
+
+## 1  Handbook File Anatomy
+
+```markdown
+# -- handbook: gap_kd_epilepsy.md ---------------------------------
+
+Primary_goal: seek_gap                       # mandatory
+Seed_query:   "ketogenic diet AND epilepsy"  # optional
+Tools_allowed:
+  - search_pubmed
+  - run_pico
+  - find_existing_sr
+  - propose_alternative_pico
+  - prisma_check
+Exploration: true           # Gemma may use ripple mode
+Success:
+  eligible_trials  >= 6
+  AND PRISMA_compliant == false
+Stop_after: 1              # #success clusters before stop
+-------------------------------------------------------------------
+```
+
+### 1.1  Field semantics
+
+| Key             | Meaning                                                             |
+| --------------- | ------------------------------------------------------------------- |
+| `Primary_goal`  | `"seek_gap"`, `"conduct_SR"`, `"manual_task"` …                     |
+| `Seed_query`    | Initial PubMed semantic search (passed to `search_pubmed`).         |
+| `Tools_allowed` | Whitelist of heavy tools from `docs/70_tools.md`.                   |
+| `Exploration`   | `true` allows Gemma to call *ripple* expansion; else semantic only. |
+| `Success`       | Boolean expression using metrics available in cluster manifest.     |
+| `Stop_after`    | Agent halts after X clusters meet `Success`.                        |
+
+No other keys are recognised; unknown keys cause executor error at load time.
+
+---
+
+## 2  Goal-State JSON
+
+`goal_state.json` is updated and persisted **each cycle**.
+
+```json
+{
+  "goal_id": "6a4f46a1b2e6",
+  "primary_goal": "seek_gap",
+  "topic": "ketogenic diet epilepsy adults",
+  "status": "in_progress",
+  "handbook_path": "handbooks/gap_kd_epilepsy.md",
+  "cluster_id": null,
+  "subgoals": [],
+  "history": [
+     {"cycle":0,"event":"created"},
+     {"cycle":5,"event":"pivoted","new_goal":"conduct_SR"}
+  ]
+}
+```
+
+* `goal_id` = `sha1(handbook_path + start_ts)[:12]`.
+* `status` transitions: `in_progress` → `stopped`.
+* Append-only `history` records deformable events (pivot, stop, error).
+
+Gemma is **allowed** to mutate every top-level field except `goal_id` and `history`.
+Executor appends history automatically when it detects changes.
+
+---
+
+## 3  Tool Invocation Grammar
+
+Gemma tells executor to run a tool by emitting a **JSON “Action” block** as the *last* line of its response:
+
+```json
+Action: {
+  "tool": "search_pubmed",
+  "args": {
+     "query": "adult refractory ketone ester epilepsy",
+     "expand_mode": "semantic"
+  }
+}
+```
+
+Rules:
+
+* Only one `Action:` per reply.
+* Arguments **must** match the schema in `docs/70_tools.md`; extra keys cause executor error.
+* If Gemma forgets to end with `Action:` the executor interprets the reply as “thoughts only” and the cycle ends without side effects.
+
+---
+
+## 4  Cycle Scheduler
+
+```
+while True:
+    load goal_state
+    if status == "stopped": break
+
+    # 1. Retrieval / Expansion
+    run any pending tool from previous cycle result
+
+    # 2. Organisation
+    recluster new+border (if split/merge last cycle)
+
+    # 3. Gemma thinking
+    prompt = make_prompt(cluster_metrics, sample_titles, handbook, goal_state)
+    gemma_reply = call_gemma(prompt)
+    parse_and_execute_Action(gemma_reply)
+
+    # 4. Decision
+    if success_condition_met:
+        goal_state.status = "stopped"
+    persist goal_state
+    sleep(loop_delay)
+```
+
+* `loop_delay` default 5 seconds to avoid hammering APIs.
+* Only one Gemma prompt per cycle keeps GPU util predictable.
+
+---
+
+## 5  Example Prompt Snippet (generated)
+
+```
+# Cluster 07e3a1dca9b4 – KD vs AED paediatric
+Size: 146 | ERS: 0.32 | het_numeric: 0.54 | CVGR: 0.08
+Unseen_upstream: 3  | Unseen_downstream: 72
+5 sample titles:
+• Ketogenic Diet in Drug-Resistant Childhood Epilepsy...
+• Double-Blind Trial of 4:1 KD vs Placebo...
+...
+
+Handbook says Primary_goal = "seek_gap".
+Success requires eligible_trials ≥ 6 & PRISMA_compliant false.
+You may use tools: search_pubmed, run_pico, find_existing_sr, propose_alternative_pico, prisma_check.
+Current eligible_trials: 5
+Existing_SR_overlap: 0.21
+
+<< write your reasoning >>
+<< end with Action {...} >>
+```
+
+---
+
+## 6  Gemma Behavioural Expectations
+
+* **Chain-of-Thought length**: unbounded, but logs rotate; no penalty for verbosity.
+* **Tool choice**: must align with whitelist else executor aborts cycle.
+* **Pivoting**: Gemma sets `primary_goal="conduct_SR"` and fills `cluster_id` when it decides a gap is ready for a full review.
+* **Stopping**: Gemma sets `status="stopped"` or executor auto-stops when `Stop_after` count reached.
+
+---
+
+## 7  Failure Handling
+
+* Missing or malformed `Action` → executor logs `no_action` event, continues next cycle.
+* Unknown tool → executor writes error to `history`, sets `status:"error"`, halts goal.
+* `run_pico` cost guard: if cluster size > 800 abstracts, executor confirms with Gemma (“Are you sure?”) before batch call.
+
+---
+
+## 8  Extending Handbooks
+
+* Adding a new **Primary\_goal** requires writing a success expression and possibly new tools.
+* Handbook parsing is strict YAML front matter; syntax errors abort run at startup.
+
+---
+
+*This memo equips you to craft handbooks and understand how Gemma and the executor negotiate actions each cycle.  Next memo `70_tools.md` defines the heavy-tool API contracts Gemma can rely on.*
+
+
+
+###############################################################################
+### FILE: docs/80_guardrails_logging.md
+###############################################################################
+**Filename:** `docs/80_guardrails_logging.md`
+
+---
+
+# 80 – Guard-Rails, Error Resilience & Logging Strategy
+
+The agent must run unattended for days without corrupting state or exhausting resources.
+This memo enumerates every fail-safe, retry policy, and log practice that keeps the system self-healing and auditable.
+
+---
+
+## 1  Memory & Token Safety
+
+| Guard               | Trigger                                    | Action                                                                           |
+| ------------------- | ------------------------------------------ | -------------------------------------------------------------------------------- |
+| **RAM guard**       | `psutil.virtual_memory().available < 2 GB` | Abort expansion loop; mark `"expansion_halt":"RAM"` in log and cluster manifest. |
+| **GPU VRAM guard**  | CUDA OOM during embedding                  | Halve batch size and retry once; if still OOM, skip batch and log.               |
+| **Gemma token cap** | Prompt > 9 500 tokens                      | Oldest abstracts trimmed until cap met.                                          |
+
+---
+
+## 2  API Reliability
+
+| API              | Retry policy                | Offline fallback                                          |
+| ---------------- | --------------------------- | --------------------------------------------------------- |
+| NCBI E-utilities | 3 retries, back-off `2^n` s | PubMed Baseline XML snapshot queried via SQLite mirror    |
+| Crossref         | 3 retries, 10-s wait        | Skip refs; upstream parent step logs `"crossref_offline"` |
+
+If an API remains unreachable for **>24 h**, executor sets goal\_state `"status":"paused_api"` and sleeps until manual restart.
+
+---
+
+## 3  JSON Robustness
+
+* Gemma responses parsed with `json5` (allows trailing commas).
+* On `JSONDecodeError` executor sends *one* repair prompt:
+
+```
+System: "Return ONLY valid JSON for the prior message."
+```
+
+If second attempt fails ➜ write `"json_error":true` to log; cycle ends without state change.
+
+---
+
+## 4  Log Structure
+
+Logs live in `logs/YYYY-MM-DD_cycleN.md`.
+
+### 4.1 Markdown Template
+
+```
+## Cycle 17  (2025-08-04 14:22 UTC)
+
+### Goal
+goal_id: 6a4f46a1b2e6   primary: seek_gap   topic: KD epilepsy adults
+
+### Gemma Prompt (truncated)
+> ...
+### Gemma Response
+> Thought: ...
+> Action: { ... }
+
+### Executor Notes
+- tool=search_pubmed   cand=2000  accepted=123
+- expansion_halt: RAM
+- json_status: ok
+
+### Resource Stats
+RAM used: 13.1 GiB  VRAM used: 4.7 GiB  Δpapers: +123
+```
+
+* Chain-of-thought retained verbatim; redact manually before sharing.
+
+### 4.2 Rotation
+
+* At midnight local time, previous day’s log folder gzipped (`2025-08-04.zip`).
+* Zip deletion after 30 days—configurable (`log_retention_days`).
+
+---
+
+## 5  STOP & PAUSE Controls
+
+* **Hard STOP:** create empty file `STOP` in project root ➜ executor finishes current cycle, sets goal\_state.status=`"stopped_manual"`, exits.
+* **Pause until resume:** create file `PAUSE` ➜ executor saves state and sleeps; remove file to resume.
+
+No interactive shell required; safe for headless screen sessions.
+
+---
+
+## 6  History & Audit Trail
+
+Every change to goal\_state.json appended to `history`:
+
+```json
+{"cycle":21,"event":"merge_clusters",
+ "source":"fa12cd8...","target":"67e9c14..."}
+```
+
+History persists across restarts (SQLite WAL ensures atomic write).
+
+---
+
+## 7  Crash Recovery
+
+* Executor catches top-level exceptions, logs traceback, sets goal\_state `"status":"crashed"`, exits.
+* On next launch, if status=`"crashed"` or `"paused_api"` ➜ auto-resume cycle counter+1.
+* In-progress embedding batches are idempotent: vector append writes go to temp file then `os.rename()`.
+
+---
+
+## 8  Security Posture (local environment)
+
+* No external inbound ports opened.
+* API keys stored in `.env`; loaded via `python-dotenv`.
+* Raw API JSON cached locally; remove before public release.
+
+---
+
+The guard-rail framework now makes the core loop self-recovering, memory-bounded, and fully auditable.  Proceed to `90_config.md` for the canonical list of all tunable knobs.
+
+
+
+###############################################################################
+### FILE: docs/90_config.md
+###############################################################################
+**Filename:** `docs/90_config.md`
+
+---
+
+# 90 – Master Configuration Reference (`config.toml`)
+
+All numeric knobs, path pointers, and rate limits live in a single TOML file at project root.
+You should *never* hard-code constants in the Python packages—read them from this file once at startup.
+
+Copy the template below as `config.toml` and edit as desired.
+Any field omitted falls back to the shown default.
+
+```toml
+###############################################################################
+# INGEST & API
+###############################################################################
+[ingest]
+# PubMed E-utilities
+pubmed_batch          = 200       # PMIDs per efetch request
+max_qps               = 3         # API calls per second
+retry_attempts        = 3
+backoff_factor        = 2         # seconds^attempt
+
+# Crossref
+crossref_timeout_s    = 20
+crossref_retry        = 3
+
+# Commit frequency to SQLite (rows)
+insert_commit_every   = 2000
+
+# Baseline XML snapshot path
+baseline_dir          = "baseline_xml/"
+
+###############################################################################
+# EMBEDDING
+###############################################################################
+[embedding]
+chunk_size            = 50000     # abstracts per GPU batch
+refresh_threshold     = 10000     # new papers before embedding pass
+model_name            = "Qwen-0.6B-instruct"
+fp16                  = true
+
+# Token budget for Gemma prompt
+token_soft_cap        = 9500
+
+###############################################################################
+# CLUSTERING
+###############################################################################
+[clustering]
+min_samples           = 8
+min_cluster_size      = 30
+dispersion_split      = 0.70       # trigger for Gemma split
+tau_assign_fallback   = 0.20       # if P95 not computable
+
+###############################################################################
+# EXPANSION – SEMANTIC BOUNDARY
+###############################################################################
+[expansion.semantic]
+tau_start             = 0.60
+delta_tau             = 0.05
+boundary_batch_size   = 40
+no_keep_limit         = 0          # stop when Gemma keeps <= this
+
+###############################################################################
+# EXPANSION – UPSTREAM / RIPPLE
+###############################################################################
+[expansion.upstream]
+alpha_coverage        = 0.25
+max_parents           = 30
+gemma_reject_threshold= 0.80       # % rejected to trigger halving alpha
+tau_sem_child         = 0.45       # cosine gate for downstream seeds
+
+###############################################################################
+# HARDWARE GUARDS
+###############################################################################
+[hardware]
+ram_reserve_bytes     = 2147483648     # 2 GiB
+gpu_batch_halving     = true
+
+###############################################################################
+# TOOLS
+###############################################################################
+[tools]
+# enable/disable heavy tools for debugging
+enable_search_pubmed          = true
+enable_run_pico               = true
+enable_prisma_check           = true
+enable_find_existing_sr       = true
+enable_propose_alternative_pico = true
+
+###############################################################################
+# LOGGING & ROTATION
+###############################################################################
+[logging]
+log_dir               = "logs/"
+retain_days           = 30
+zip_old_logs          = true
+
+###############################################################################
+# GOAL EXECUTION
+###############################################################################
+[goal]
+loop_delay_s          = 5
+max_tool_calls        = 1000            # hard safety cap per goal
+
+###############################################################################
+# SYSTEMATIC REVIEW THRESHOLDS
+###############################################################################
+[sr]
+min_eligible_trials   = 6
+prisma_mandatory_items = [4,5,6,7,8,9,10]
+```
+
+---
+
+## How to Change a Value
+
+1. Open `config.toml`, edit the field.
+2. Restart the agent—modules read config only at launch.
+3. The new value is logged in `Cycle 0` header for traceability.
+
+---
+
+## Programmatic Access Example
+
+```python
+import tomllib, pathlib
+cfg = tomllib.load(open(pathlib.Path("config.toml"), "rb"))
+tau0 = cfg["expansion"]["semantic"]["tau_start"]
+```
+
+---
+
+### End of master config.
+
+This concludes the architecture documentation set.
+You can now proceed to coding or paste code snippets for alignment review.
+
+
+
+###############################################################################
+### FILE: memo_update.md
+###############################################################################
+### **Final Architecture Memo — Autonomous Literature-Discovery & SR Agent**
+
+*(All structural decisions locked; ready to move on to coding details)*
+
+---
+
+## 1 Core Philosophy
+
+1. **Deterministic plumbing** handles data ingest, embeddings, clustering, graph walks.
+2. **Gemma 3 n** supplies all language understanding, strategic planning, filtering, and goal pivots.
+3. **Qwen 0.6 B** provides instruction-aware sentence embeddings used everywhere cosine similarity is required.
+4. **Single handbook prompt** per goal explains tools and success criteria; Gemma can mutate `goal_state.json` to pivot topics or switch from gap-scouting to full SR.
+5. **Sequential cycles** (no true concurrency) but multiple goals are supported by interleaving cycles; each cycle touches only one goal.
+
+---
+
+## 2 Directory Layout
+
+```
+project_root/
+  db/        papers.db, ref.sqlite
+  emb/       E.npy, p.npy, i.npy, c.npy, o.npy, m.npy
+  cache/     crossref_json/, pubmed_xml/
+  logs/      YYYY-MM-DD_cycleN.md   (full prompts + COT)
+  outputs/   dossiers/, sr_drafts/
+  artifacts/ YYYYMMDD/  (weekly frozen snapshots)
+  config.toml
+  handbooks/ *.md
+```
+
+---
+
+## 3 Static Extraction Schema (Gemma JSON per abstract)
+
+| Key         | Contents (string)        | Embedding file |
+| ----------- | ------------------------ | -------------- |
+| P           | population incl. age & N | p.npy          |
+| I           | intervention incl. dose  | i.npy          |
+| C           | comparator               | c.npy          |
+| O           | primary outcome          | o.npy          |
+| StudyDesign | “RCT”, “cohort”…         | m.npy          |
+
+Missing fields → empty string (zero vector).
+
+---
+
+## 4 Citation Graph Construction
+
+1. **PubMed**: basic metadata + citing links among PMIDs.
+2. **Crossref**: reference lists (DOI→DOI).  Dedup by mapping DOI→PMID.
+3. Insert edges into `ref(src,dst)` with `INSERT OR IGNORE`.
+4. Chronology inconsistencies tolerated (DAG not required).
+
+---
+
+## 5 Expansion Algorithms
+
+* **Upstream (parents)**
+
+  * Compute parent citation frequency `f(p)`.
+  * Accept parents until cumulative `Σ f(p)` ≥ **α = 0.25** or **M = 30** parents, whichever first.
+  * Pass titles to Gemma for semantic rejection; retry with α / 2 if Gemma rejects > 80 %.
+* **Downstream (children)**
+
+  * **Method C**: semantic cosine sort; start τ₀ = 0.60, decrease by δ = 0.05.
+  * Boundary batch of 40 titles sent to Gemma each step; keep adding until Gemma returns zero relevant.
+
+Both directions stop when free RAM < 2 GB.
+
+---
+
+## 6 Clustering & Stability
+
+* **HDBSCAN** over `[I|C|O|StudyDesign]` embeddings.
+* **First approval** freezes cluster ID (SHA-1 of label+timestamp) and centroid.
+* New papers join nearest centroid if cosine ≥ **τ\_assign = 0.20**.
+* Gemma may call `split_cluster` or `merge_clusters`; recluster only inside affected clusters.
+
+---
+
+## 7 Tool Registry (heavy calls only)
+
+```
+search_pubmed        -> JSON hits
+embed_text           -> 1024-d vector(s)
+run_pico             -> PICO JSONL
+prisma_check         -> PRISMA compliance JSON
+find_existing_sr     -> {overlap: float, ids:[…]}
+propose_alternative_pico -> new PICO string
+```
+
+Executor queues calls; model contention solved by sequential cycles.
+
+---
+
+## 8 Goal-State Autonomy
+
+```json
+{
+  "primary_goal": "seek_gap" | "conduct_SR",
+  "topic": "string",
+  "cluster_id": 17,
+  "status": "in_progress" | "stopped",
+  "subgoals": []
+}
+```
+
+Gemma may edit any field except history; executor persists per cycle.
+
+---
+
+## 9 Adaptive Thresholds
+
+* `τ_assign` and semantic τ in expansion **derived per cluster** from P95 of intra-cluster cosine distribution; default fallbacks 0.20 / 0.60.
+* All thresholds stored in `config.toml`; logged per cycle for audit.
+
+---
+
+## 10 Guard-Rails & Logging
+
+* Full Gemma chain-of-thought retained; logs rotate after 30 days (gzip).
+* JSON parse error → retry once with “FIX JSON ONLY”.
+* API failures → fallback to local PubMed baseline after 5 retries.
+* `STOP` file in root pauses loop after current cycle.
+
+---
+
+## 11 Outstanding Scalars (all accepted as defaults)
+
+```
+α (upstream coverage)        = 0.25
+M (max parents)              = 30
+τ0 / δ (semantic expansion)  = 0.60 / 0.05
+boundary_batch_size          = 40
+τ_assign                     = adaptive (fallback 0.20)
+min_eligible_trials          = 6
+token_soft_cap               = 9500
+```
+
+You can change them later in config without code edits.
+
+---
+
+
+###############################################################################
+### FILE: project_old.md
+###############################################################################
+This is the final, comprehensive plan for the **Autonomous Research Agent (ARA)**.
+
+---
+
+### **Project Goal: The Autonomous Discovery of Meta-Analysis Gaps**
+
+To build a persistent, self-directing software agent that autonomously explores the scientific citation network to identify, validate, and propose novel, high-potential opportunities for systematic reviews and meta-analyses.
+
+### **Core Architecture: The Agent-Centric Framework**
+
+The system is not a linear pipeline but a stateful agent operating in a continuous Sense-Think-Act loop. It runs in sessions on a local machine, saves its state, and becomes progressively smarter over time.
+
+*   **World Model:** A persistent **Knowledge Graph (`G`)** stored on disk, containing all known papers, citations, and their calculated attributes. This is the agent's long-term memory.
+*   **Sensory Cortex:** A **Metric Engine** that runs computationally cheap analyses on the graph to detect signals of change and opportunity.
+*   **Strategic Core:** A **Large Language Model (Gemma 3n)** acting as the central reasoning engine, making strategic decisions based on sensory input.
+*   **Action Toolkit:** A library of "expensive" functions the agent can choose to execute, such as deep PICO analysis or graph expansion.
+*   **Logging System:** An immutable log of all LLM prompts and responses for auditing and multi-model validation.
+
+---
+
+### **Phase 1: Knowledge Graph Construction & Representation (The World)**
+
+**Objective:** To build and maintain a rich, multi-modal representation of the scientific literature.
+
+1.  **Node Definition:** Each paper (`v`) in the graph `G` is a node, uniquely identified by its DOI/PMID.
+2.  **Edge Definition:** A directed edge `(u, v)` represents that paper `u` cites paper `v`.
+3.  **Multi-Faceted Feature Vector (`X_v`):** Every node is described by a concatenated feature vector containing:
+    *   **Semantic Features:** A text embedding of the title/abstract (e.g., from `qwen3-0.6b`).
+    *   **Temporal Features:** Normalized publication year and age.
+    *   **Impact Features:** Total citation count.
+    *   **Type Features:** A binary `is_review` flag derived from PubMed metadata.
+4.  **Context-Aware Embedding (`Z_v`):** Using the **GraphSAGE** framework, we generate a final, context-aware embedding for each node. This is the core representational learning step.
+    *   **Process:** GraphSAGE combines the node's own feature vector (`X_v`) with features aggregated from its local neighborhood.
+    *   **Customization:** We will employ **intelligent neighbor sampling**, selecting neighbors based on a heuristic (e.g., Top-K by citation count) to proactively filter noise from spurious citations.
+    *   **Inductive Nature:** A trained GraphSAGE model can generate embeddings for new nodes without full retraining, enabling efficient graph expansion.
+
+### **Phase 2: Topic Kernel Lifecycle Management (The Agent's "Lenses")**
+
+**Objective:** To dynamically identify and manage coherent research topics as they evolve within the graph.
+
+1.  **Topic Kernel Definition:** A Topic Kernel (`K_C`) is an analytical construct, not a fixed object. It is defined as all nodes within a certain embedding distance of a cluster centroid, making it robust to imperfect clustering (HDBSCAN).
+2.  **Lifecycle Events:** The agent will periodically run checks to manage these kernels:
+    *   **Growth:** Kernels are updated by re-running the radius search after the graph in their vicinity expands.
+    *   **Merge:** If two kernel centroids become too similar, they are merged into a single, new kernel representing a field convergence.
+    *   **Split (Partition):** If a kernel's internal semantic dispersion becomes too high, it is fractured into smaller, more coherent sub-topic kernels.
+    *   **Extinguish:** If a kernel's momentum metrics (like CVGR) die down and its synthesis score is high, it is archived as "obsolete" or "solved."
+
+### **Phase 3: The ARA's Operational Loop (The "Sense-Think-Act" Cycle)**
+
+This is the main execution flow of the agent.
+
+1.  **SENSE (Triage):**
+    *   Upon starting a session, the **Metric Engine** runs a suite of computationally cheap metrics on all active Topic Kernels.
+    *   The dashboard of metrics includes: **Semantic Dispersion**, **Internal Density**, **Citation Velocity Growth Rate (CVGR)**, **Citation Entropy**, **Synthesis Saturation Score (S3)**, and **Evidence Refresh Score (ERS)**.
+    *   These metrics are compiled into a **"Triage Report"** highlighting the most interesting topics.
+
+2.  **THINK (Strategy):**
+    *   The Triage Report is passed to the **Gemma 3n Agent Core**.
+    *   The agent's prompt asks it to choose a single, strategic action from a predefined list based on the metrics. This is the core decision-making step.
+    *   **Action Space:**
+        *   `PICO_DEEP_DIVE`: Trigger the final, expensive analysis on a highly promising topic.
+        *   `EXPAND_DOWNSTREAM`: Expand the graph from a "hot" topic's child frontier (papers that cite it).
+        *   `EXPAND_UPSTREAM`: Expand the graph from a topic's parent frontier to understand its roots.
+        *   `VALIDATE_EXTERNALLY`: Formulate and execute a PubMed MeSH query as a sanity check.
+        *   `DEPRIORITIZE`: Mark a topic as uninteresting.
+
+3.  **ACT (Execution):**
+    *   The system parses the agent's JSON decision and executes the chosen action from its **Action Toolkit**.
+    *   If an `EXPAND` action is chosen, new nodes are added to the graph, their features are engineered, and their `Z_v` embeddings are generated inductively. The agent then dynamically adds a new task to its own priority queue to analyze the newly expanded region.
+
+### **Phase 4: The Meta-Analysis Gap Deep Dive (The Final Goal)**
+
+This is the most expensive action, only triggered when the agent has high confidence.
+
+1.  **Granular Comminution:** For a chosen Topic Kernel, Gemma 3n is deployed at scale to perform **per-article PICO extraction**, creating a structured database of the evidence components.
+2.  **Generative Question Synthesis:** The agent analyzes this PICO database and **creatively synthesizes a novel, unifying PICO question** that could form the basis of a new meta-analysis, along with a list of compatible primary research papers.
+3.  **Final LLM Judgment:** A final dossier is presented to the **Gemma 3n agent as the "Journal Editor"**. This dossier includes:
+    *   The machine-generated PICO question.
+    *   The state of the evidence, framed using the **Evidence Refresh Score (ERS)** logic ("X% of the evidence is new since the last major review...").
+    *   Abstracts of the key papers.
+    *   The results of the external MeSH query check.
+4.  **The Actionable Output:** The agent makes a final, reasoned **"GREENLIT"** or **"REJECTED"** decision, providing a justification. This constitutes a fully validated, machine-discovered opportunity for a new meta-analysis, ready for human review.
+
+This comprehensive plan establishes a dynamic, persistent, and intelligent system that leverages graph learning for structure, cheap metrics for triage, and a powerful LLM for strategic decision-making and final, nuanced judgment, directly realizing the sophisticated vision we have developed.
+
+
+###############################################################################
+### FILE: project_proposal.md
+###############################################################################
+### **Project Proposal**
+
+**Autonomous Literature-Discovery & Systematic-Review Agent**
+*(Gemma 3n Reasoning + Qwen 0.6 B Retrieval, PubMed-scale, laptop-hardware)*
+
+---
+
+## 1  Introduction & Rationale
+
+Systematic reviews (SRs) and meta-analyses are the gold standard for evidence synthesis, yet the manual workflow—formulating search strategies, screening abstracts, checking PRISMA items, assessing gaps—remains painfully slow.  Large-language models (LLMs) can now read, reason and plan, while cheap embedding models can project millions of abstracts into a coherent semantic space.
+The project goal is to combine the two:
+
+* **Gemma 3n (7-B, local)** supplies human-grade comprehension, planning, and adaptation—“the autonomous researcher”.
+* **Qwen-0.6 B** produces dense vectors for **instruction-aware retrieval** and cheap similarity tests—“the sensory cortex”.
+* Deterministic Python plumbing performs data ingestion, embedding, clustering, PICO extraction, graph walks—“the muscle & skeleton”.
+
+The resulting agent should:
+
+1. **Scout for untouched SR opportunities** (“review gaps”).
+2. **Pivot goals** when prior SRs already exist, crafting alternative PICO themes automatically.
+3. **Conduct a full PRISMA-compliant SR** when the evidence base is ready.
+4. **Run end-to-end on a single high-end laptop** (i7-13700H, 32 GB RAM, RTX 4050 6 GB).
+
+---
+
+## 2  Guiding Design Principles
+
+| Principle                                  | Implementation consequence                                                                                                        |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Separation of cognition vs. plumbing**   | Deterministic code owns all data movement; Gemma only reads language and chooses next tool.                                       |
+| **Cluster scaffold, paper-level rigour**   | HDBSCAN groups papers for efficiency; Gemma can still operate per-paper (PICO, PRISMA) within any cluster.                        |
+| **Open tool registry, not verb whitelist** | Any heavy or external call (PubMed API, batch PICO) is a tool. Gemma can chain tools freely; executor blocks only unknown names.  |
+| **Self-mutating goal object**              | `goal_state.json` is rewritten by Gemma to pivot topics or goals without human intervention.                                      |
+| **Context not budget-starved**             | Laptop handles ≈10 k tokens; sample 6-24 abstracts per cluster is affordable.                                                     |
+| **Noise control via composite scoring**    | Candidate papers from PubMed are accepted only if semantic cosine + bibliographic coupling exceed a threshold—no hard count caps. |
+
+---
+
+## 3  High-Level Loop
+
+```
+┌──── Retrieval ─────┐  graph-walk + Gemma queries
+└──── Organisation ──┘  HDBSCAN, metrics, Gemma merge/split/label
+┌──── Processing ────┐  Gemma runs tools: ensure_completeness, run_pico, etc.
+└──── Decision ──────┘  Gemma mutates goal_state or stops
+(repeat)
+```
+
+*Everything Gemma does is dictated by a **handbook prompt** bundled with the goal.*
+
+---
+
+## 4  Modular Architecture
+
+| #      | Module                   | Owner                           | Key I/O                                                                    | Extensibility                          |
+| ------ | ------------------------ | ------------------------------- | -------------------------------------------------------------------------- | -------------------------------------- |
+| **A**  | Data layer               | deterministic                   | `papers.db`, `G.pkl`, `E.npy`                                              | swap in full-text bucket later         |
+| **B1** | Graph-walk expansion     | deterministic                   | adds refs+citers                                                           | depth configurable                     |
+| **B2** | Semantic-query expansion | deterministic (Gemma-initiated) | PubMed → score(cos, coupling) → filtered IDs                               | adjust score weights/threshold         |
+| **C**  | Organisation             | det. + Gemma                    | clusters, metrics, labels                                                  | drop-in new clustering (e.g. spectral) |
+| **D**  | Tool registry            | det. + Gemma                    | `search_pubmed`, `run_pico`, `prisma_check`, `propose_alternative_pico`, … | register new tools anytime             |
+| **E**  | Goal engine              | Gemma                           | `goal_state.json`                                                          | multiple simultaneous goals future     |
+| **F**  | Logging & Guard-rails    | deterministic                   | full prompts + COT stored                                                  | OOM trimming, JSON fix-retry           |
+
+---
+
+## 5  Key Algorithms
+
+### 5.1 Composite Relevance Score (Semantic Expansion)
+
+```
+cos_sem  = ⟨Q_vec,   E_cand⟩          # Qwen instruction embed
+jac_refs = |refs∩seed| / |refs∪seed|   # bibliographic coupling
+score    = 0.7·cos_sem + 0.3·jac_refs
+accept if score ≥ τ   (e.g. 0.42)
+```
+
+Accepted seeds ripple ≤1 hop in citation graph until `growth_cap` reached.
+
+### 5.2 Heterogeneity Fusion
+
+```
+het_numeric = mean(het_P, het_I, het_O)   # cosine variety
+Het_final   = 0.5·Gemma_het + 0.5·het_numeric
+```
+
+Used only for ranking, never a gating criterion.
+
+---
+
+## 6  Tool Inventory (initial)
+
+| Tool (heavy)                                                                      | Payload size  | When Gemma calls             |
+| --------------------------------------------------------------------------------- | ------------- | ---------------------------- |
+| `search_pubmed`                                                                   | API roundtrip | fill evidence gaps           |
+| `run_pico`                                                                        | batch Gemma   | when cluster looks promising |
+| `prisma_check`                                                                    | single Gemma  | after ≥ min\_eligible trials |
+| `find_existing_sr`                                                                | API + cosine  | evaluate prior SR overlap    |
+| `propose_alternative_pico`                                                        | Gemma plan    | pivot to new theme           |
+| `score_candidates`                                                                | GPU batch     | part of expansion scoring    |
+| *(light helpers)* `add_papers`, `compute_metrics`, `recluster` hidden from Gemma. |               |                              |
+
+Adding e.g. `risk_bias_assess` later is a single registration.
+
+---
+
+## 7  Handbook Templates
+
+### 7.1 Gap-Scouting Handbook (excerpt)
+
+```markdown
+Primary_goal: seek_gap
+Seed_query: "ketogenic diet AND epilepsy"
+
+Success:
+  eligible_trials >= 6  AND  PRISMA_compliant == false
+
+Tools_allowed:
+  search_pubmed, score_candidates, add_papers,
+  run_pico, find_existing_sr, propose_alternative_pico
+```
+
+### 7.2 Conduct-SR Handbook (excerpt)
+
+```markdown
+Primary_goal: conduct_SR
+Cluster_id: 2            # inserted by previous run
+
+ensure_completeness:
+  min_eligible: 10
+  exploration: true      # may search_pubmed
+
+run_SR_pipeline:
+  sequence: run_pico -> prisma_check -> summarise_findings
+```
+
+---
+
+## 8  End-to-End Example Outcomes
+
+1. **Topic reviewed already** → Gemma detects high SR overlap → generates new PICO on “MCT vs Classical diet adults/teens” → completes SR.
+2. **Sparse evidence** → `ensure_completeness` loops semantic expansions until trials ≥ 6 → drafts gap dossier.
+3. **Citation dead-end** → semantic query injects fresh adult trials → cluster revived.
+4. **Data flood** → composite score thresholds admit only coherent seeds, preventing OOM.
+
+---
+
+## 9  Implementation Roadmap (module order)
+
+1. **A** Data ingest + Qwen embeddings
+2. **B1/B2** retrieval engines + scoring
+3. **C** clustering, metrics, Gemma merge/split label
+4. **D** tool executor + open registry
+5. **E** goal\_state manager + handbook loader
+6. **F** logging, guard-rails, diagnostics
+
+Each module is unit-testable; integration smoke test uses 5 k-paper mini-corpus.
+
+---
+
+## 10  Risks & Mitigations
+
+| Risk                             | Mitigation                                      |
+| -------------------------------- | ----------------------------------------------- |
+| Semantic drift from Qwen updates | version pin Qwen; re-embed on upgrade           |
+| Gemma loops infinitely           | executor caps 1 000 tool calls / session        |
+| API downtime (PubMed)            | local SQLite mirror snapshot fallback           |
+| Hallucinated JSON                | one retry with “FIX JSON ONLY”, else skip cycle |
+| Legal text ingestion             | abstracts-only; PDFs optional encrypted bucket  |
+
+---
+
+## 11  Future Extensions
+
+* **GraphSAGE-based citation intent** edges (support, contrast).
+* **Risk-of-bias LLM tool** for SR drafts.
+* **Interactive dashboard**—clusters visualised, Gemma decisions replayed.
+* **Multiple concurrent goals** with shared literature cache.
+
+---
+
+### **Conclusion**
+
+This modular plan gives you:
+
+* **Full autonomy**—Gemma can pivot topics and goals when evidence dictates.
+* **No hidden coupling**—each module swaps cleanly, handbook text rewires behaviour.
+* **Predictable resource use**—large semantic jumps are pruned by composite scoring; GPU memory guarded.
+* **Laptop viability**—max context ≈10 k tokens, embedding batches throttled.
+
+With the six core modules in place, you can incrementally bolt on smarter embeddings, deeper bias checks, or richer graphs **without reopening architectural debates**.
+
+
+
+###############################################################################
+### FILE: technical_memo.md
+###############################################################################
+### **Technical Memo — Revision 2**
+
+**Subject:** Embedding Layers, Sampling Policy, and Rich-Field Extraction
+**Date:** *\[insert today]*
+
+---
+
+## 1  Embedding & Similarity Layers  (Updated)
+
+| Vector set          | Generator                                  | Dim       | File                | Notes                                      |
+| ------------------- | ------------------------------------------ | --------- | ------------------- | ------------------------------------------ |
+| **E (semantic)**    | Qwen-0.6 B on `"Title · Abstract"`         | 1024 FP16 | `E.npy` (mmapped)   | Baseline content signal                    |
+| **Z (context)**     | **GraphSAGE, 1-hop** on citation graph     | 256 FP16  | `Z.npy`             | Captures network position (up/down-stream) |
+| **P / I / C / O**   | Qwen on Gemma-extracted fields (4 vectors) | 4 × 1024  | `p.npy` … `o.npy`   | Only after first PICO screen               |
+| **M (methodology)** | Qwen on Gemma field `"StudyDesign"`        | 1024      | `m.npy`             | RCT vs cohort vs case-series               |
+| **Centroids**       | mean of any chosen vector set              | —         | in cluster manifest | Recomputed each cycle                      |
+
+### Why GraphSAGE is included
+
+*Z* provides extra orthogonal evidence when semantic text is noisy (e.g. methods papers heavily cited).
+
+### Why Comparator **C** is now explicit
+
+Comparator often flips effect direction; needed for split/merge logic and heterogeneity.
+
+### Extensible Rich Field Extraction
+
+Gemma extraction schema (all strings):
+
+```json
+{
+ "P": "...",
+ "I": "...",
+ "C": "...",
+ "O": "...",
+ "StudyDesign": "randomised double-blind",
+ "PopulationAge": "children 2-12",
+ "SampleSize": "47"
+}
+```
+
+You can add new keys later—simply create another embedding matrix (e.g. `d.npy` for dose description); clustering formula can switch to concatenating `[I|C|O|M]` without architectural change.
+
+---
+
+## 2  Composite Similarity (E, Z, PICO, Methodology)
+
+When all vectors exist:
+
+```
+sim = 0.40·cos(Q, E)  +
+      0.15·cos(Q, Z)  +
+      0.25·cos(Q, I⊕C⊕O) +
+      0.20·cos(Q, M)
+```
+
+Weights are config; fall back gracefully if a component missing.
+
+---
+
+## 3  Dynamic Cluster Sampling Policy (Token-aware)
+
+```python
+MAX_TOK = 9500              # soft cap
+tok_per_abs = 80            # empirical avg title+abstract
+m = min(  max(6, floor(0.15*size)),  size )
+while m * tok_per_abs > MAX_TOK:
+        m -= 1              # trim until within token budget
+```
+
+*On large clusters Gemma may see 60–80 abstracts if they’re short; on small clusters it always sees all.*
+
+---
+
+## 4  Gemma Extraction Consistency Guard
+
+After Gemma returns JSON for a paper:
+
+* deterministic code **validates schema keys**; missing keys → empty string, placeholder vector = zero.
+* titles with identical P/I/O but conflicting StudyDesign raise a flag for manual audit (logged).
+
+---
+
+## 5  Search-Expansion Scoring (with Graph & Methodology)
+
+```
+cos_sem  = ⟨Q,   E⟩
+cos_ctx  = ⟨Q_Z, Z⟩                  # Q_Z = Qwen("context of "+query)
+cos_pico = ⟨Q, I⊕C⊕O⟩
+cos_meth = ⟨Q, M⟩
+jac_refs = bibliographic coupling     # as clarified
+
+score = 0.35·cos_sem + 0.15·cos_ctx +
+        0.20·cos_pico + 0.10·cos_meth +
+        0.20·jac_refs
+accept if score ≥ τ (default 0.40)
+```
+
+> *Context weight reduced because GraphSAGE dim=256; PICO and Methodology now explicit.*
+
+---
+
+## 6  Tool Registry — Minimal Heavy Calls Only
+
+| Tool                       | Heavy?      | Rationale       |
+| -------------------------- | ----------- | --------------- |
+| `search_pubmed`            | HTTP API    | network I/O     |
+| `embed_text`               | GPU         | Qwen inference  |
+| `run_pico`                 | GPU+LLM     | Gemma batch     |
+| `prisma_check`             | LLM         | Gemma           |
+| `find_existing_sr`         | API+compute | overlap calc    |
+| `propose_alternative_pico` | LLM         | heavy reasoning |
+
+Everything else (score calc, add\_papers, recluster, GraphSAGE) is automatic plumbing; Gemma can trigger them indirectly by choosing higher-level verbs (`ensure_completeness`, etc.).
+
+---
+
+## 7  Fallback Logic for “SR Already Exists but Related Gap Possible”
+
+1. `find_existing_sr` → overlap ≥ 0.6 triggers Gemma to call `propose_alternative_pico`.
+2. New PICO is embedded; deterministic code launches **a new Retrieval seed** without clearing earlier data (reuse vectors).
+3. Old cluster marked “covered\_by\_existing\_SR”, new cluster grows.
+
+---
+
+## 8  Hardware Envelope Check
+
+* 10 M papers × (E: 1024 FP16) = 20 GB mem-map
+* Z 256-d ≈ 5 GB if generated, but can be loaded lazily in 1 M-node chunks.
+* 32 GB RAM budget suffices if sampling batches ≤ 65 k vectors.
+
+---
+
+## 9  Outstanding Knobs To Freeze
+
+| Parameter                         | Current Default          | Need your OK |
+| --------------------------------- | ------------------------ | ------------ |
+| token\_soft\_cap                  | 9 500                    |              |
+| score τ                           | 0.40                     |              |
+| weights (sem/ctx/pico/meth/jac)   | 0.35/0.15/0.20/0.10/0.20 |              |
+| min\_eligible\_trials (gap vs SR) | 6                        |              |
+
+

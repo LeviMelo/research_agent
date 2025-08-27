@@ -1,0 +1,60 @@
+{
+  "timestamp": "2025-08-11T21:52:37+00:00",
+  "target_pico": {
+    "P": "Adults with primary hypertension",
+    "I": "Drug X",
+    "C": "Placebo or Drug Y",
+    "O": "Systolic blood pressure reduction",
+    "S": "Randomized controlled trials prioritized"
+  },
+  "counts": {
+    "batched": 7,
+    "batch_size": 24
+  },
+  "throughput_abstracts_per_sec": 0.21209289193562714,
+  "silver_precision_yes_pubtype_primary": 1.0,
+  "sample_outputs": [
+    {
+      "paper_id": "10.1000/alpha1",
+      "is_primary_on_PICO": "yes",
+      "design_hint": "RCT",
+      "why_5_words": "Randomized controlled trial"
+    },
+    {
+      "paper_id": "10.1000/alpha2",
+      "is_primary_on_PICO": "no",
+      "design_hint": "cohort",
+      "why_5_words": "Observational cohort study"
+    },
+    {
+      "paper_id": "10.1000/alpha3",
+      "is_primary_on_PICO": "no",
+      "design_hint": "other",
+      "why_5_words": "Systematic review"
+    },
+    {
+      "paper_id": "10.1000/alpha4",
+      "is_primary_on_PICO": "no",
+      "design_hint": "case-control",
+      "why_5_words": "Case-control study"
+    },
+    {
+      "paper_id": "10.1000/alpha5",
+      "is_primary_on_PICO": "yes",
+      "design_hint": "RCT",
+      "why_5_words": "Head-to-head trial"
+    },
+    {
+      "paper_id": "10.1000/alpha6",
+      "is_primary_on_PICO": "no",
+      "design_hint": "other",
+      "why_5_words": "Narrative review"
+    },
+    {
+      "paper_id": "10.1000/alpha7",
+      "is_primary_on_PICO": "yes",
+      "design_hint": "other",
+      "why_5_words": "Prospective study"
+    }
+  ]
+}

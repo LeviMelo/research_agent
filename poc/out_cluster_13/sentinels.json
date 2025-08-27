@@ -1,0 +1,58 @@
+{
+  "sentinel_mode": "relaxed",
+  "sentinels": [],
+  "decisions": [],
+  "telemetry": {
+    "ctx_limit": 8096,
+    "completion_allowance": 512,
+    "safety_margin": 256,
+    "system_overhead_tokens_est": 451,
+    "batches": [
+      {
+        "batch_index": 1,
+        "try_k": 16,
+        "est_prompt_tokens": 1543,
+        "status": 400,
+        "usage": {},
+        "latency_s": 2.083,
+        "note": "{\"error\":\"'response_format.type' must be 'json_schema' or 'text'\"}"
+      },
+      {
+        "batch_index": 1,
+        "try_k": 8,
+        "est_prompt_tokens": 1041,
+        "status": 400,
+        "usage": {},
+        "latency_s": 2.06,
+        "note": "{\"error\":\"'response_format.type' must be 'json_schema' or 'text'\"}"
+      },
+      {
+        "batch_index": 1,
+        "try_k": 4,
+        "est_prompt_tokens": 767,
+        "status": 400,
+        "usage": {},
+        "latency_s": 2.041,
+        "note": "{\"error\":\"'response_format.type' must be 'json_schema' or 'text'\"}"
+      },
+      {
+        "batch_index": 1,
+        "try_k": 2,
+        "est_prompt_tokens": 623,
+        "status": 400,
+        "usage": {},
+        "latency_s": 2.056,
+        "note": "{\"error\":\"'response_format.type' must be 'json_schema' or 'text'\"}"
+      },
+      {
+        "batch_index": 1,
+        "try_k": 1,
+        "est_prompt_tokens": 544,
+        "status": 400,
+        "usage": {},
+        "latency_s": 2.02,
+        "note": "{\"error\":\"'response_format.type' must be 'json_schema' or 'text'\"}"
+      }
+    ]
+  }
+}

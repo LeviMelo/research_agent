@@ -1,0 +1,3 @@
+cluster_id,seeds,total_emb,depth_emb,total_tfidf,depth_tfidf,total_bc,depth_bc,total_rrf,depth_rrf,jaccard_tfidf_vs_emb,jaccard_bc_vs_emb,jaccard_rrf_vs_emb
+4,8,826,12,857,12,850,11,843,11,0.30364058869093724,0.15506547208821503,0.25112443778110943
+8,12,894,13,1026,13,1249,15,898,14,0.1169284467713787,0.1255252100840336,0.14212874442319948
